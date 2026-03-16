@@ -49,7 +49,7 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler("app_server.log")
+        logging.FileHandler("data/app_server.log")
     ]
 )
 logger = logging.getLogger(__name__)
@@ -57,8 +57,8 @@ logger = logging.getLogger(__name__)
 try:
     from fastapi import FastAPI, UploadFile, File
     import shutil
-    from app.detection_engine import detect_all_smells
-    from app.smell_analyzer import run_smell_analysis_pipeline
+    from backend.app.detection_engine import detect_all_smells
+    from backend.app.smell_analyzer import run_smell_analysis_pipeline
 except Exception as e:
     logger.error(f"Import error: {e}")
     sys.exit(1)
@@ -93,9 +93,9 @@ async def analyze(file: UploadFile = File(...)):
         # Save ONLY smell names to file for the next engine
         import json
         smell_names = [item["smell"] for item in final_result.get("priority_list", [])]
-        with open("priority_list.json", "w") as f:
+        with open("data/priority_list.json", "w") as f:
             json.dump(smell_names, f, indent=4)
-        logger.info("Priority smell names saved to priority_list.json")
+        logger.info("Priority smell names saved to data/priority_list.json")
         
         return final_result
     except Exception as e:
