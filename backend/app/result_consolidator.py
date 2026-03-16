@@ -1,4 +1,4 @@
-from app.constants import get_category_for_smell
+from backend.app.constants import get_category_for_smell
 import re
 
 def consolidate_results(engine_results):

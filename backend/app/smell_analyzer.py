@@ -1,8 +1,8 @@
-from app.result_consolidator import consolidate_results
-from app.explanation_generator import generate_explanation
-from app.severity_predictor import predict_severity
-from app.priority_calculator import calculate_priority
-from app.constants import get_category_for_smell
+from backend.app.result_consolidator import consolidate_results
+from backend.app.explanation_generator import generate_explanation
+from backend.app.severity_predictor import predict_severity
+from backend.app.priority_calculator import calculate_priority
+from backend.app.constants import get_category_for_smell
 import concurrent.futures
 import logging
 

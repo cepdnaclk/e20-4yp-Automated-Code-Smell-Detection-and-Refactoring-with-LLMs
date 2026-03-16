@@ -1,4 +1,4 @@
-from app.constants import SEVERITY_MAPPING, CATEGORY_WEIGHTS
+from backend.app.constants import SEVERITY_MAPPING, CATEGORY_WEIGHTS
 
 def calculate_priority(primary_smell, severity_label, category):
     """

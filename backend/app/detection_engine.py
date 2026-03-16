@@ -21,9 +21,9 @@ def detect_all_smells(java_file):
 
     }'''
 
-from app.static_detector import detect_static
-from app.ml_detector import detect_metric
-from app.llm_detector import detect_llm
+from backend.app.static_detector import detect_static
+from backend.app.ml_detector import detect_metric
+from backend.app.llm_detector import detect_llm
 import logging
 
 logger = logging.getLogger(__name__)
