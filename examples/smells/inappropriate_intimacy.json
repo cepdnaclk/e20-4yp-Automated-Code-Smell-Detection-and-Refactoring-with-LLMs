@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Inappropriate Intimacy",
+    "strategy": "move_method",
+    "before": "class AuditView:\n    def customer_status(self, order):\n        return order.customer.account.status",
+    "after": "class AuditView:\n    def customer_status(self, order):\n        return order.customer_status()\n\n\nclass Order:\n    def customer_status(self):\n        return self.customer.account.status",
+    "why": "The caller no longer reaches into another object's internal relationships."
+  },
+  {
+    "smell": "Inappropriate Intimacy",
+    "strategy": "move_method",
+    "before": "class ShippingService:\n    def destination_code(self, shipment):\n        return shipment.address.postal_code",
+    "after": "class ShippingService:\n    def destination_code(self, shipment):\n        return shipment.destination_code()\n\n\nclass Shipment:\n    def destination_code(self):\n        return self.address.postal_code",
+    "why": "Behavior is moved closer to the data instead of exposing internals."
+  },
+  {
+    "smell": "Inappropriate Intimacy",
+    "strategy": "move_method",
+    "before": "class ProjectSummary:\n    def manager_email(self, project):\n        return project.team.manager.email",
+    "after": "class ProjectSummary:\n    def manager_email(self, project):\n        return project.manager_email()\n\n\nclass Project:\n    def manager_email(self):\n        return self.team.manager.email",
+    "why": "The consuming class stops depending on another object's deep internal structure."
+  }
+]

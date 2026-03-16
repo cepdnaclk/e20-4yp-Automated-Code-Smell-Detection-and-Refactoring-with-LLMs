@@ -1,0 +1,37 @@
+﻿[
+  {
+    "smell": "Dead Code",
+    "strategy": "remove_dead_code",
+    "before": "def normalize(name):\n    cleaned = name.strip()\n    unused = cleaned.lower()\n    return cleaned",
+    "after": "def normalize(name):\n    cleaned = name.strip()\n    return cleaned",
+    "why": "The unused variable is removed while preserving behavior."
+  },
+  {
+    "smell": "Dead Code",
+    "strategy": "remove_dead_code",
+    "before": "def status(flag):\n    if flag:\n        return 'ok'\n    else:\n        return 'fail'\n    print('never reached')",
+    "after": "def status(flag):\n    if flag:\n        return 'ok'\n    else:\n        return 'fail'",
+    "why": "Unreachable statements after the return are deleted."
+  },
+  {
+    "smell": "Dead Code",
+    "strategy": "remove_dead_code",
+    "before": "def total(values):\n    result = sum(values)\n    debug = []\n    return result",
+    "after": "def total(values):\n    result = sum(values)\n    return result",
+    "why": "The dead local variable is removed to simplify the function."
+  },
+  {
+    "smell": "Dead Code",
+    "strategy": "remove_dead_code",
+    "before": "def parse_age(raw):\n    age = int(raw)\n    temp = age * 2\n    return age",
+    "after": "def parse_age(raw):\n    age = int(raw)\n    return age",
+    "why": "The temporary value was never read, so removing it leaves behavior unchanged."
+  },
+  {
+    "smell": "Dead Code",
+    "strategy": "remove_dead_code",
+    "before": "def build_message(user):\n    greeting = 'Hello ' + user\n    archived = False\n    return greeting",
+    "after": "def build_message(user):\n    greeting = 'Hello ' + user\n    return greeting",
+    "why": "An unused flag is removed so the function keeps only live state."
+  }
+]

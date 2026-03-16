@@ -1,0 +1,45 @@
+﻿[
+  {
+    "smell": "Data Clumps",
+    "strategy": "introduce_parameter_object",
+    "before": "def save_edge(table_name, field_name, table_type, field_type):\n    return [table_name, field_name, table_type, field_type]",
+    "after": "class EdgeEndpoint:\n    def __init__(self, table_name, field_name, table_type, field_type):\n        self.table_name = table_name\n        self.field_name = field_name\n        self.table_type = table_type\n        self.field_type = field_type\n\n\ndef save_edge(endpoint):\n    return [endpoint.table_name, endpoint.field_name, endpoint.table_type, endpoint.field_type]",
+    "why": "Adapted from a documented refactoring where primitive table and field data was grouped into richer objects in a public Java project.",
+    "source_project": "wmcbain/java-refactoring-project",
+    "source_url": "https://github.com/wmcbain/java-refactoring-project",
+    "source_notes": "Adapted from the README-documented move from arrays/primitives to Table and Field objects.",
+    "adapted_from_real_world": true
+  },
+  {
+    "smell": "Data Clumps",
+    "strategy": "introduce_parameter_object",
+    "before": "def create_profile(first_name, last_name, email, phone):\n    return {'first': first_name, 'last': last_name, 'email': email, 'phone': phone}",
+    "after": "class ContactInfo:\n    def __init__(self, first_name, last_name, email, phone):\n        self.first_name = first_name\n        self.last_name = last_name\n        self.email = email\n        self.phone = phone\n\n\ndef create_profile(contact):\n    return {'first': contact.first_name, 'last': contact.last_name, 'email': contact.email, 'phone': contact.phone}",
+    "why": "A repeated cluster of related values is grouped into one object with domain meaning.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Data Clumps",
+    "strategy": "introduce_parameter_object",
+    "before": "def print_address(name, street, city, postal_code):\n    return f'{name}, {street}, {city}, {postal_code}'",
+    "after": "class AddressInfo:\n    def __init__(self, name, street, city, postal_code):\n        self.name = name\n        self.street = street\n        self.city = city\n        self.postal_code = postal_code\n\n\ndef print_address(address):\n    return f'{address.name}, {address.street}, {address.city}, {address.postal_code}'",
+    "why": "The recurring address fields are turned into a single cohesive value object.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Data Clumps",
+    "strategy": "introduce_parameter_object",
+    "before": "def register_vehicle(make, model, year, vin):\n    return f'{make}-{model}-{year}-{vin}'",
+    "after": "class VehicleInfo:\n    def __init__(self, make, model, year, vin):\n        self.make = make\n        self.model = model\n        self.year = year\n        self.vin = vin\n\n\ndef register_vehicle(vehicle):\n    return f'{vehicle.make}-{vehicle.model}-{vehicle.year}-{vehicle.vin}'",
+    "why": "Vehicle details move together as one object instead of recurring primitive bundles.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Data Clumps",
+    "strategy": "introduce_parameter_object",
+    "before": "def update_contact(street, city, state, zip_code):\n    return f'{street}|{city}|{state}|{zip_code}'",
+    "after": "class MailingAddress:\n    def __init__(self, street, city, state, zip_code):\n        self.street = street\n        self.city = city\n        self.state = state\n        self.zip_code = zip_code\n\n\ndef update_contact(address):\n    return f'{address.street}|{address.city}|{address.state}|{address.zip_code}'",
+    "why": "A repeated address clump becomes a single parameter object with a clear name.",
+    "adapted_from_real_world": false
+  }
+]

@@ -1,0 +1,45 @@
+﻿[
+  {
+    "smell": "Blob (God Class)",
+    "strategy": "extract_class",
+    "before": "class EdgeConvertGUI:\n    def open_file(self):\n        pass\n\n    def convert_edges(self):\n        pass\n\n    def save_results(self):\n        pass\n\n    def show_dialog(self):\n        pass",
+    "after": "class EdgeConvertGUI:\n    def __init__(self):\n        self.converter = EdgeConverter()\n        self.persistence = EdgePersistence()\n\n    def open_file(self):\n        return self.persistence.open_file()\n\n    def convert_edges(self):\n        return self.converter.convert_edges()\n\n    def save_results(self):\n        return self.persistence.save_results()\n\n    def show_dialog(self):\n        pass\n\n\nclass EdgeConverter:\n    def convert_edges(self):\n        pass\n\n\nclass EdgePersistence:\n    def open_file(self):\n        pass\n\n    def save_results(self):\n        pass",
+    "why": "Adapted from a documented God Class refactoring in a public Java project.",
+    "source_project": "wmcbain/java-refactoring-project",
+    "source_url": "https://github.com/wmcbain/java-refactoring-project",
+    "source_notes": "Adapted from the README-documented EdgeConvertGUI God Class refactoring.",
+    "adapted_from_real_world": true
+  },
+  {
+    "smell": "Blob (God Class)",
+    "strategy": "extract_class",
+    "before": "class UserAdmin:\n    def create_user(self, user):\n        print('saved')\n\n    def send_welcome_email(self, user):\n        print('email', user.email)\n\n    def send_sms(self, user):\n        print('sms', user.phone)",
+    "after": "class UserAdmin:\n    def __init__(self):\n        self.notifier = UserNotifier()\n\n    def create_user(self, user):\n        print('saved')\n\n    def send_welcome_email(self, user):\n        self.notifier.send_welcome_email(user)\n\n    def send_sms(self, user):\n        self.notifier.send_sms(user)\n\n\nclass UserNotifier:\n    def send_welcome_email(self, user):\n        print('email', user.email)\n\n    def send_sms(self, user):\n        print('sms', user.phone)",
+    "why": "Notification behavior is moved into a dedicated class, reducing the breadth of UserAdmin.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Blob (God Class)",
+    "strategy": "extract_class",
+    "before": "class InventorySystem:\n    def add_item(self, item):\n        print('added')\n\n    def stock_value(self, items):\n        return sum(item.price * item.qty for item in items)\n\n    def print_report(self, items):\n        for item in items:\n            print(item.name)",
+    "after": "class InventorySystem:\n    def __init__(self):\n        self.reporter = InventoryReporter()\n\n    def add_item(self, item):\n        print('added')\n\n    def stock_value(self, items):\n        return sum(item.price * item.qty for item in items)\n\n    def print_report(self, items):\n        self.reporter.print_report(items)\n\n\nclass InventoryReporter:\n    def print_report(self, items):\n        for item in items:\n            print(item.name)",
+    "why": "Reporting is extracted from inventory management so the class becomes more cohesive.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Blob (God Class)",
+    "strategy": "extract_class",
+    "before": "class CatalogService:\n    def save(self, item):\n        print('saved')\n\n    def export(self, items):\n        print('exported')\n\n    def notify(self, item):\n        print('notified')",
+    "after": "class CatalogService:\n    def __init__(self):\n        self.exporter = CatalogExporter()\n        self.notifier = CatalogNotifier()\n\n    def save(self, item):\n        print('saved')\n\n    def export(self, items):\n        self.exporter.export(items)\n\n    def notify(self, item):\n        self.notifier.notify(item)\n\n\nclass CatalogExporter:\n    def export(self, items):\n        print('exported')\n\n\nclass CatalogNotifier:\n    def notify(self, item):\n        print('notified')",
+    "why": "Several unrelated responsibilities are moved out to make the class smaller and more cohesive.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Blob (God Class)",
+    "strategy": "extract_class",
+    "before": "class MembershipAdmin:\n    def register(self, member):\n        print('registered')\n\n    def export(self, members):\n        print('exported')\n\n    def send_reminders(self, members):\n        print('reminded')",
+    "after": "class MembershipAdmin:\n    def __init__(self):\n        self.exporter = MembershipExporter()\n        self.reminder_service = ReminderService()\n\n    def register(self, member):\n        print('registered')\n\n    def export(self, members):\n        self.exporter.export(members)\n\n    def send_reminders(self, members):\n        self.reminder_service.send(members)\n\n\nclass MembershipExporter:\n    def export(self, members):\n        print('exported')\n\n\nclass ReminderService:\n    def send(self, members):\n        print('reminded')",
+    "why": "Extracting secondary concerns reduces class size and improves cohesion.",
+    "adapted_from_real_world": false
+  }
+]

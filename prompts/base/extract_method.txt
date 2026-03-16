@@ -1,0 +1,23 @@
+﻿You are refactoring code for the smell {{SMELL_TYPE}} using the strategy {{STRATEGY}}.
+
+Goal:
+{{REFACTORING_GOAL}}
+
+Specific Instructions:
+- Identify one or more cohesive blocks inside the target method.
+- Extract them into clearly named helper methods.
+- Keep the original method as the main orchestration path.
+- Preserve the original method signature.
+- Do not introduce unnecessary abstractions.
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Code:
+{{RAW_CODE}}

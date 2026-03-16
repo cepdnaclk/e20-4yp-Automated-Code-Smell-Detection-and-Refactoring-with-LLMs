@@ -1,0 +1,37 @@
+﻿[
+  {
+    "smell": "Excessive Coupling",
+    "strategy": "reduce_coupling",
+    "before": "class ReportService:\n    def title(self, order):\n        return order.customer.account.region.name",
+    "after": "class ReportService:\n    def title(self, order):\n        return order.region_name()\n\n\nclass Order:\n    def region_name(self):\n        return self.customer.account.region.name",
+    "why": "The caller no longer depends on the full nested object graph."
+  },
+  {
+    "smell": "Excessive Coupling",
+    "strategy": "reduce_coupling",
+    "before": "class InvoiceView:\n    def city(self, order):\n        return order.customer.address.city",
+    "after": "class InvoiceView:\n    def city(self, order):\n        return order.customer_city()\n\n\nclass Order:\n    def customer_city(self):\n        return self.customer.address.city",
+    "why": "A focused method reduces direct knowledge of internal relationships."
+  },
+  {
+    "smell": "Excessive Coupling",
+    "strategy": "reduce_coupling",
+    "before": "class AuditService:\n    def owner_name(self, project):\n        return project.team.manager.profile.name",
+    "after": "class AuditService:\n    def owner_name(self, project):\n        return project.owner_name()\n\n\nclass Project:\n    def owner_name(self):\n        return self.team.manager.profile.name",
+    "why": "The service now depends on one clear method instead of a message chain."
+  },
+  {
+    "smell": "Excessive Coupling",
+    "strategy": "reduce_coupling",
+    "before": "class ShippingPresenter:\n    def country(self, shipment):\n        return shipment.order.customer.address.country",
+    "after": "class ShippingPresenter:\n    def country(self, shipment):\n        return shipment.destination_country()\n\n\nclass Shipment:\n    def destination_country(self):\n        return self.order.customer.address.country",
+    "why": "The presenter asks for one intention-revealing method instead of traversing multiple collaborators."
+  },
+  {
+    "smell": "Excessive Coupling",
+    "strategy": "reduce_coupling",
+    "before": "class DashboardService:\n    def manager_email(self, team):\n        return team.department.head.profile.email",
+    "after": "class DashboardService:\n    def manager_email(self, team):\n        return team.head_email()\n\n\nclass Team:\n    def head_email(self):\n        return self.department.head.profile.email",
+    "why": "Encapsulating the navigation path reduces structural knowledge in the calling service."
+  }
+]

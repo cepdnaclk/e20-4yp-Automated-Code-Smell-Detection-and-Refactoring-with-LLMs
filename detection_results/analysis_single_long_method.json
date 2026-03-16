@@ -1,0 +1,17 @@
+﻿{
+  "file_name": "single_long_method.py",
+  "language": "Python",
+  "smells": [
+    {
+      "type": "Long Method",
+      "severity": "Major",
+      "location": "process_order",
+      "metrics": {
+        "method_name": "process_order",
+        "loc": 24,
+        "cyclomatic_complexity": 5,
+        "responsibilities": 4
+      }
+    }
+  ]
+}

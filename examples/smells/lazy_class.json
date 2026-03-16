@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Lazy Class",
+    "strategy": "inline_method_or_class",
+    "before": "class NameHelper:\n    def format_name(self, user):\n        return user.name\n\n\nclass NamePrinter:\n    def print_name(self, user):\n        helper = NameHelper()\n        return helper.format_name(user)",
+    "after": "class NamePrinter:\n    def print_name(self, user):\n        return user.name",
+    "why": "The helper class adds no value and is safely inlined."
+  },
+  {
+    "smell": "Lazy Class",
+    "strategy": "inline_method_or_class",
+    "before": "class TaxWrapper:\n    def apply(self, total):\n        return total * 1.1\n\n\nclass Invoice:\n    def total_with_tax(self, total):\n        wrapper = TaxWrapper()\n        return wrapper.apply(total)",
+    "after": "class Invoice:\n    def total_with_tax(self, total):\n        return total * 1.1",
+    "why": "A one-method wrapper class is removed because it contributes no meaningful abstraction."
+  },
+  {
+    "smell": "Lazy Class",
+    "strategy": "inline_method_or_class",
+    "before": "class EnabledCheck:\n    def call(self, flag):\n        return flag\n\n\nclass Service:\n    def enabled(self, flag):\n        check = EnabledCheck()\n        return check.call(flag)",
+    "after": "class Service:\n    def enabled(self, flag):\n        return flag",
+    "why": "The tiny delegated class is inlined to simplify the design."
+  }
+]

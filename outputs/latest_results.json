@@ -1,0 +1,40 @@
+{
+  "file_name": "single_long_method.py",
+  "language": "Python",
+  "results": [
+    {
+      "smell_type": "Long Method",
+      "strategy": "extract_method",
+      "status": "success",
+      "rationale": "Applied extract_method for Long Method within size_complexity.",
+      "original_code": "﻿def process_order(order):\n    subtotal = 0\n    for item in order[\"items\"]:\n        subtotal += item[\"price\"] * item[\"quantity\"]\n\n    discount = 0\n    if order[\"customer_type\"] == \"vip\":\n        discount = subtotal * 0.10\n    elif order[\"customer_type\"] == \"member\":\n        discount = subtotal * 0.05\n\n    shipping = 0\n    if subtotal > 100:\n        shipping = 0\n    else:\n        shipping = 12\n\n    tax = (subtotal - discount) * 0.08\n    total = subtotal - discount + shipping + tax\n\n    summary = {\n        \"customer\": order[\"customer_name\"],\n        \"subtotal\": subtotal,\n        \"discount\": discount,\n        \"shipping\": shipping,\n        \"tax\": tax,\n        \"total\": total,\n    }\n    return summary\n",
+      "refactored_code": "def process_order(order):\n    subtotal = calculate_subtotal(order)\n    discount = calculate_discount(subtotal, order[\"customer_type\"])\n    shipping = calculate_shipping(subtotal)\n    tax = calculate_tax(subtotal, discount)\n    total = calculate_total(subtotal, discount, shipping, tax)\n    \n    summary = {\n        \"customer\": order[\"customer_name\"],\n        \"subtotal\": subtotal,\n        \"discount\": discount,\n        \"shipping\": shipping,\n        \"tax\": tax,\n        \"total\": total,\n    }\n    return summary\n\ndef calculate_subtotal(order):\n    subtotal = 0\n    for item in order[\"items\"]:\n        subtotal += item[\"price\"] * item[\"quantity\"]\n    return subtotal\n\ndef calculate_discount(subtotal, customer_type):\n    discount = 0\n    if customer_type == \"vip\":\n        discount = subtotal * 0.10\n    elif customer_type == \"member\":\n        discount = subtotal * 0.05\n    return discount\n\ndef calculate_shipping(subtotal):\n    shipping = 0 if subtotal > 100 else 12\n    return shipping\n\ndef calculate_tax(subtotal, discount):\n    tax = (subtotal - discount) * 0.08\n    return tax\n\ndef calculate_total(subtotal, discount, shipping, tax):\n    total = subtotal - discount + shipping + tax\n    return total",
+      "validation": {
+        "syntax": true,
+        "compile": null,
+        "structural": null,
+        "semantic_check": "not_run",
+        "errors": []
+      },
+      "metrics": {
+        "loc_before": 25,
+        "loc_after": 36,
+        "complexity_before": 5,
+        "complexity_after": 5,
+        "parameter_count_before": 1,
+        "parameter_count_after": 1
+      },
+      "category": "design",
+      "group": "size_complexity",
+      "location": "process_order",
+      "severity": "Major",
+      "focused_scope": "﻿def process_order(order):\n    subtotal = 0\n    for item in order[\"items\"]:\n        subtotal += item[\"price\"] * item[\"quantity\"]\n\n    discount = 0\n    if order[\"customer_type\"] == \"vip\":\n        discount = subtotal * 0.10\n    elif order[\"customer_type\"] == \"member\":\n        discount = subtotal * 0.05\n\n    shipping = 0\n    if subtotal > 100:\n        shipping = 0\n    else:\n        shipping = 12\n\n    tax = (subtotal - discount) * 0.08\n    total = subtotal - discount + shipping + tax\n\n    summary = {\n        \"customer\": order[\"customer_name\"],\n        \"subtotal\": subtotal,\n        \"discount\": discount,\n        \"shipping\": shipping,\n        \"tax\": tax,\n        \"total\": total,\n    }\n    return summary",
+      "refactoring_plan": "Direct refactoring mode enabled; apply the strategy conservatively within the focused scope."
+    }
+  ],
+  "summary": {
+    "smells_received": 1,
+    "smells_refactored": 1,
+    "failures": 0
+  }
+}

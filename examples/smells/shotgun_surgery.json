@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Shotgun Surgery",
+    "strategy": "extract_class",
+    "before": "class OrderService:\n    def create_order(self, order):\n        self.save(order)\n        self.send_email(order)\n        self.send_sms(order)\n\n    def save(self, order):\n        print('saved')\n\n    def send_email(self, order):\n        print('email')\n\n    def send_sms(self, order):\n        print('sms')",
+    "after": "class OrderService:\n    def __init__(self):\n        self.notifier = OrderNotifier()\n\n    def create_order(self, order):\n        self.save(order)\n        self.notifier.notify(order)\n\n    def save(self, order):\n        print('saved')\n\n\nclass OrderNotifier:\n    def notify(self, order):\n        self.send_email(order)\n        self.send_sms(order)\n\n    def send_email(self, order):\n        print('email')\n\n    def send_sms(self, order):\n        print('sms')",
+    "why": "Related scattered notification changes are centralized into one collaborator."
+  },
+  {
+    "smell": "Shotgun Surgery",
+    "strategy": "extract_class",
+    "before": "class UserWorkflow:\n    def register(self, user):\n        self.store(user)\n        self.audit(user)\n        self.welcome(user)",
+    "after": "class UserWorkflow:\n    def __init__(self):\n        self.registration_support = RegistrationSupport()\n\n    def register(self, user):\n        self.store(user)\n        self.registration_support.after_register(user)\n\n    def store(self, user):\n        print('stored')\n\n\nclass RegistrationSupport:\n    def after_register(self, user):\n        self.audit(user)\n        self.welcome(user)\n\n    def audit(self, user):\n        print('audited')\n\n    def welcome(self, user):\n        print('welcomed')",
+    "why": "Post-registration changes are grouped so one change point handles related updates."
+  },
+  {
+    "smell": "Shotgun Surgery",
+    "strategy": "extract_class",
+    "before": "class MembershipService:\n    def activate(self, member):\n        self.persist(member)\n        self.invoice(member)\n        self.notify(member)",
+    "after": "class MembershipService:\n    def __init__(self):\n        self.activation_actions = ActivationActions()\n\n    def activate(self, member):\n        self.persist(member)\n        self.activation_actions.run(member)\n\n    def persist(self, member):\n        print('persisted')\n\n\nclass ActivationActions:\n    def run(self, member):\n        self.invoice(member)\n        self.notify(member)\n\n    def invoice(self, member):\n        print('invoiced')\n\n    def notify(self, member):\n        print('notified')",
+    "why": "A common set of follow-up changes is consolidated behind a single abstraction."
+  }
+]

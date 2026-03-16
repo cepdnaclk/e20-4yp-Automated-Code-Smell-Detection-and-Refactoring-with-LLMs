@@ -1,0 +1,17 @@
+﻿{
+  "file_name": "SingleLongMethodJava.java",
+  "language": "Java",
+  "smells": [
+    {
+      "type": "Long Method",
+      "severity": "Major",
+      "location": "buildReport",
+      "metrics": {
+        "method_name": "buildReport",
+        "loc": 24,
+        "cyclomatic_complexity": 5,
+        "responsibilities": 4
+      }
+    }
+  ]
+}

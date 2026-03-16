@@ -1,0 +1,22 @@
+﻿You are refactoring code for the smell {{SMELL_TYPE}} using the strategy {{STRATEGY}}.
+
+Goal:
+{{REFACTORING_GOAL}}
+
+Specific Instructions:
+- Group related parameters into a meaningful object.
+- Name the new type based on the domain meaning of those values.
+- Update the method signature consistently.
+- Keep the refactoring minimal and behavior-preserving.
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Code:
+{{RAW_CODE}}

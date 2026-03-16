@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Middle Man",
+    "strategy": "inline_method_or_class",
+    "before": "class PriceService:\n    def total(self, order):\n        return order.total()",
+    "after": "class PriceService:\n    def total(self, order):\n        return sum(item.price for item in order.items)",
+    "why": "A trivial forwarding method is inlined to remove unnecessary indirection."
+  },
+  {
+    "smell": "Middle Man",
+    "strategy": "inline_method_or_class",
+    "before": "class CustomerView:\n    def email(self, customer):\n        return customer.email()",
+    "after": "class CustomerView:\n    def email(self, customer):\n        return customer.email_address",
+    "why": "The pass-through wrapper is removed so the call path is more direct."
+  },
+  {
+    "smell": "Middle Man",
+    "strategy": "inline_method_or_class",
+    "before": "class ShippingFacade:\n    def city(self, order):\n        return order.city()",
+    "after": "class ShippingFacade:\n    def city(self, order):\n        return order.customer.address.city",
+    "why": "A useless delegating layer is removed to simplify navigation."
+  }
+]

@@ -1,0 +1,9 @@
+﻿[
+  {
+    "smell": "Blob (God Class)",
+    "strategy": "extract_class",
+    "before": "class OrderManager:\n    def __init__(self):\n        self.orders = []\n\n    def add_order(self, order):\n        self.orders.append(order)\n\n    def calculate_total(self):\n        return sum(order.total for order in self.orders)\n\n    def export_csv(self):\n        return '\\n'.join(str(order.total) for order in self.orders)",
+    "after": "class OrderManager:\n    def __init__(self):\n        self.orders = []\n        self.exporter = OrderExporter()\n\n    def add_order(self, order):\n        self.orders.append(order)\n\n    def calculate_total(self):\n        return sum(order.total for order in self.orders)\n\n    def export_csv(self):\n        return self.exporter.export_csv(self.orders)\n\n\nclass OrderExporter:\n    def export_csv(self, orders):\n        return '\\n'.join(str(order.total) for order in orders)",
+    "why": "Export behavior is separated from order management so the main class has a narrower responsibility."
+  }
+]

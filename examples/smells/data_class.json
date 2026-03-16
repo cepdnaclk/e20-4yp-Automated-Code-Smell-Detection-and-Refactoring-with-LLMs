@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Data Class",
+    "strategy": "encapsulate_field",
+    "before": "class UserData:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email",
+    "after": "class UserData:\n    def __init__(self, name, email):\n        self._name = name\n        self._email = email\n\n    @property\n    def name(self):\n        return self._name\n\n    @property\n    def email(self):\n        return self._email",
+    "why": "The class stops exposing raw fields directly and starts protecting its internal state."
+  },
+  {
+    "smell": "Data Class",
+    "strategy": "encapsulate_field",
+    "before": "class ProductInfo:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+    "after": "class ProductInfo:\n    def __init__(self, title, price):\n        self._title = title\n        self._price = price\n\n    @property\n    def title(self):\n        return self._title\n\n    @property\n    def price(self):\n        return self._price",
+    "why": "Encapsulation is introduced so later business behavior can grow around protected fields."
+  },
+  {
+    "smell": "Data Class",
+    "strategy": "encapsulate_field",
+    "before": "class Address:\n    def __init__(self, city, postal_code):\n        self.city = city\n        self.postal_code = postal_code",
+    "after": "class Address:\n    def __init__(self, city, postal_code):\n        self._city = city\n        self._postal_code = postal_code\n\n    @property\n    def city(self):\n        return self._city\n\n    @property\n    def postal_code(self):\n        return self._postal_code",
+    "why": "The class is prepared for richer behavior by reducing direct field exposure."
+  }
+]

@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Excessive Class Length",
+    "strategy": "extract_class",
+    "before": "class CatalogService:\n    def save(self, item):\n        print('saved')\n\n    def export(self, items):\n        print('exported')\n\n    def notify(self, item):\n        print('notified')",
+    "after": "class CatalogService:\n    def __init__(self):\n        self.exporter = CatalogExporter()\n        self.notifier = CatalogNotifier()\n\n    def save(self, item):\n        print('saved')\n\n    def export(self, items):\n        self.exporter.export(items)\n\n    def notify(self, item):\n        self.notifier.notify(item)\n\n\nclass CatalogExporter:\n    def export(self, items):\n        print('exported')\n\n\nclass CatalogNotifier:\n    def notify(self, item):\n        print('notified')",
+    "why": "Several unrelated responsibilities are moved out to make the class smaller and more cohesive."
+  },
+  {
+    "smell": "Excessive Class Length",
+    "strategy": "extract_class",
+    "before": "class UserPlatform:\n    def create(self, user):\n        print('created')\n\n    def archive(self, user):\n        print('archived')\n\n    def invoice(self, user):\n        print('invoiced')",
+    "after": "class UserPlatform:\n    def __init__(self):\n        self.billing = UserBilling()\n\n    def create(self, user):\n        print('created')\n\n    def archive(self, user):\n        print('archived')\n\n    def invoice(self, user):\n        self.billing.invoice(user)\n\n\nclass UserBilling:\n    def invoice(self, user):\n        print('invoiced')",
+    "why": "Billing is extracted to reduce the breadth of the main class."
+  },
+  {
+    "smell": "Excessive Class Length",
+    "strategy": "extract_class",
+    "before": "class MembershipAdmin:\n    def register(self, member):\n        print('registered')\n\n    def export(self, members):\n        print('exported')\n\n    def send_reminders(self, members):\n        print('reminded')",
+    "after": "class MembershipAdmin:\n    def __init__(self):\n        self.exporter = MembershipExporter()\n        self.reminder_service = ReminderService()\n\n    def register(self, member):\n        print('registered')\n\n    def export(self, members):\n        self.exporter.export(members)\n\n    def send_reminders(self, members):\n        self.reminder_service.send(members)\n\n\nclass MembershipExporter:\n    def export(self, members):\n        print('exported')\n\n\nclass ReminderService:\n    def send(self, members):\n        print('reminded')",
+    "why": "Extracting secondary concerns reduces class size and improves cohesion."
+  }
+]

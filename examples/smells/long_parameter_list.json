@@ -1,0 +1,45 @@
+﻿[
+  {
+    "smell": "Long Parameter List",
+    "strategy": "introduce_parameter_object",
+    "before": "public Booking Create(string firstName, string lastName, string email, string phone, DateTime date, string route) {\n    return new Booking(firstName, lastName, email, phone, date, route);\n}",
+    "after": "public record PassengerDetails(string FirstName, string LastName, string Email, string Phone);\n\npublic Booking Create(PassengerDetails passenger, DateTime date, string route) {\n    return new Booking(passenger.FirstName, passenger.LastName, passenger.Email, passenger.Phone, date, route);\n}",
+    "why": "Adapted from a public OSS codebase that replaces clusters of related primitives with richer domain records to reduce parameter noise.",
+    "source_project": "OverCloudAirways/Domain-Driven-Design-Demo",
+    "source_url": "https://github.com/m-khooryani/OverCloudAirways-DDD-sample",
+    "source_notes": "Adapted from the project's DDD style of grouping passenger/trip data into domain objects.",
+    "adapted_from_real_world": true
+  },
+  {
+    "smell": "Long Parameter List",
+    "strategy": "introduce_parameter_object",
+    "before": "def create_account(first_name, last_name, email, phone, city):\n    return {'name': first_name + ' ' + last_name, 'email': email, 'phone': phone, 'city': city}",
+    "after": "class AccountInfo:\n    def __init__(self, first_name, last_name, email, phone, city):\n        self.first_name = first_name\n        self.last_name = last_name\n        self.email = email\n        self.phone = phone\n        self.city = city\n\n\ndef create_account(info):\n    return {'name': info.first_name + ' ' + info.last_name, 'email': info.email, 'phone': info.phone, 'city': info.city}",
+    "why": "A long signature is replaced with one meaningful parameter object.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Long Parameter List",
+    "strategy": "introduce_parameter_object",
+    "before": "def ship(name, street, city, country, postal_code):\n    return f'{name}-{street}-{city}-{country}-{postal_code}'",
+    "after": "class ShippingDetails:\n    def __init__(self, name, street, city, country, postal_code):\n        self.name = name\n        self.street = street\n        self.city = city\n        self.country = country\n        self.postal_code = postal_code\n\n\ndef ship(details):\n    return f'{details.name}-{details.street}-{details.city}-{details.country}-{details.postal_code}'",
+    "why": "The long parameter list becomes one explicit domain object.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Long Parameter List",
+    "strategy": "introduce_parameter_object",
+    "before": "def reserve(first_name, last_name, seat, gate, flight_code):\n    return f'{first_name} {last_name}:{seat}:{gate}:{flight_code}'",
+    "after": "class ReservationRequest:\n    def __init__(self, first_name, last_name, seat, gate, flight_code):\n        self.first_name = first_name\n        self.last_name = last_name\n        self.seat = seat\n        self.gate = gate\n        self.flight_code = flight_code\n\n\ndef reserve(request):\n    return f'{request.first_name} {request.last_name}:{request.seat}:{request.gate}:{request.flight_code}'",
+    "why": "Reservation details move from a long signature into one cohesive request object.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Long Parameter List",
+    "strategy": "introduce_parameter_object",
+    "before": "def send_notice(name, email, phone, channel, template):\n    return f'{name}:{email}:{phone}:{channel}:{template}'",
+    "after": "class NoticeTarget:\n    def __init__(self, name, email, phone, channel, template):\n        self.name = name\n        self.email = email\n        self.phone = phone\n        self.channel = channel\n        self.template = template\n\n\ndef send_notice(target):\n    return f'{target.name}:{target.email}:{target.phone}:{target.channel}:{target.template}'",
+    "why": "Closely related delivery arguments are grouped into a named parameter object.",
+    "adapted_from_real_world": false
+  }
+]

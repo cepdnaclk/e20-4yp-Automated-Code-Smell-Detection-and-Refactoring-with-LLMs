@@ -1,0 +1,45 @@
+﻿[
+  {
+    "smell": "Complex Conditional",
+    "strategy": "decompose_conditional",
+    "before": "public void mouseUp(MouseEvent e, int x, int y) {\n    if (e.isPopupTrigger()) {\n        Figure figure = drawing().findFigure(e.getX(), e.getY());\n        if (figure != null) {\n            Object attribute = figure.getAttribute(Figure.POPUP_MENU);\n            if (attribute == null) {\n                figure = drawing().findFigureInside(e.getX(), e.getY());\n            }\n            if (figure != null) {\n                showPopupMenu(figure, e.getX(), e.getY(), e.getComponent());\n            }\n        }\n    }\n    else if (e.getClickCount() == 2) {\n        handleMouseDoubleClick(e, x, y);\n    }\n    else {\n        super.mouseUp(e, x, y);\n        handleMouseUp(e, x, y);\n        handleMouseClick(e, x, y);\n    }\n}",
+    "after": "public void mouseUp(MouseEvent e, int x, int y) {\n    if (e.isPopupTrigger()) {\n        Figure figure = computeFigureForPopup(e);\n        if (figure != null) {\n            showPopupMenu(figure, e.getX(), e.getY(), e.getComponent());\n        }\n    }\n    else if (e.getClickCount() == 2) {\n        handleMouseDoubleClick(e, x, y);\n    }\n    else {\n        super.mouseUp(e, x, y);\n        handleMouseUp(e, x, y);\n        handleMouseClick(e, x, y);\n    }\n}\n\nprivate Figure computeFigureForPopup(MouseEvent e) {\n    Figure figure = drawing().findFigure(e.getX(), e.getY());\n    if (figure != null) {\n        Object attribute = figure.getAttribute(Figure.POPUP_MENU);\n        if (attribute == null) {\n            figure = drawing().findFigureInside(e.getX(), e.getY());\n        }\n    }\n    return figure;\n}",
+    "why": "Adapted from a real JHotDraw conditional-heavy method.",
+    "source_project": "JHotDraw",
+    "source_url": "https://github.com/llm-refactoring/llm-refactoring-plugin",
+    "source_notes": "Adapted from the JHotDraw mouseUp EM-Assist prompt example.",
+    "adapted_from_real_world": true
+  },
+  {
+    "smell": "Complex Conditional",
+    "strategy": "decompose_conditional",
+    "before": "def discount(customer_type, total):\n    if customer_type == 'VIP' and total > 500 or customer_type == 'REGULAR' and total > 1000:\n        return total * 0.1\n    return 0",
+    "after": "def discount(customer_type, total):\n    if is_discount_eligible(customer_type, total):\n        return total * 0.1\n    return 0\n\n\ndef is_discount_eligible(customer_type, total):\n    return (customer_type == 'VIP' and total > 500) or (customer_type == 'REGULAR' and total > 1000)",
+    "why": "The mixed business rule is extracted into a named predicate.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Complex Conditional",
+    "strategy": "decompose_conditional",
+    "before": "def can_ship(is_paid, stock, is_express):\n    if (is_paid and stock > 0) or (is_express and stock > 5):\n        return True\n    return False",
+    "after": "def can_ship(is_paid, stock, is_express):\n    return shipping_allowed(is_paid, stock, is_express)\n\n\ndef shipping_allowed(is_paid, stock, is_express):\n    return (is_paid and stock > 0) or (is_express and stock > 5)",
+    "why": "The dense boolean logic is moved into a clearly named helper.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Complex Conditional",
+    "strategy": "decompose_conditional",
+    "before": "def can_access(user, doc):\n    if (user.is_admin and doc.is_private) or (user.is_member and not doc.is_archived):\n        return True\n    return False",
+    "after": "def can_access(user, doc):\n    return has_access(user, doc)\n\n\ndef has_access(user, doc):\n    return (user.is_admin and doc.is_private) or (user.is_member and not doc.is_archived)",
+    "why": "The access decision becomes easier to reason about once the condition is named.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Complex Conditional",
+    "strategy": "decompose_conditional",
+    "before": "def shipping_cost(is_international, quantity):\n    if is_international and quantity < 10 or (not is_international and quantity < 5):\n        return 20\n    return 5",
+    "after": "def shipping_cost(is_international, quantity):\n    if requires_high_shipping(is_international, quantity):\n        return 20\n    return 5\n\n\ndef requires_high_shipping(is_international, quantity):\n    return (is_international and quantity < 10) or ((not is_international) and quantity < 5)",
+    "why": "The combined boolean rule is extracted into a named helper.",
+    "adapted_from_real_world": false
+  }
+]

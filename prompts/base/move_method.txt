@@ -1,0 +1,22 @@
+﻿You are refactoring code for the smell {{SMELL_TYPE}} using the strategy {{STRATEGY}}.
+
+Goal:
+{{REFACTORING_GOAL}}
+
+Specific Instructions:
+- Move the behavior closer to the data or class it depends on.
+- Reduce unnecessary navigation across objects.
+- Keep the new owner of the method obvious and cohesive.
+- Avoid broad unrelated restructuring.
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Code:
+{{RAW_CODE}}

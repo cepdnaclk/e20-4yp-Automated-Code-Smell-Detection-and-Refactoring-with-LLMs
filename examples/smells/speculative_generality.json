@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Speculative Generality",
+    "strategy": "inline_method_or_class",
+    "before": "class FormatterBase:\n    def format(self, value):\n        return value\n\n\nclass ValueFormatter(FormatterBase):\n    pass",
+    "after": "class ValueFormatter:\n    def format(self, value):\n        return value",
+    "why": "The unused abstraction layer is removed because it provides no meaningful variation."
+  },
+  {
+    "smell": "Speculative Generality",
+    "strategy": "inline_method_or_class",
+    "before": "def final_total(total):\n    return apply_adjustment(total)\n\n\ndef apply_adjustment(total):\n    return total",
+    "after": "def final_total(total):\n    return total",
+    "why": "A generalization with no real behavior is inlined away."
+  },
+  {
+    "smell": "Speculative Generality",
+    "strategy": "inline_method_or_class",
+    "before": "class ExportHelper:\n    def export(self, value):\n        return value\n\n\nclass ExportService:\n    def run(self, value):\n        helper = ExportHelper()\n        return helper.export(value)",
+    "after": "class ExportService:\n    def run(self, value):\n        return value",
+    "why": "The speculative helper is removed because it adds no useful abstraction."
+  }
+]

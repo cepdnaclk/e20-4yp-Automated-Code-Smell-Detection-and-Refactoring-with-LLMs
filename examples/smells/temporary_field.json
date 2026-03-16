@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Temporary Field",
+    "strategy": "extract_class",
+    "before": "class OrderProcessor:\n    def __init__(self):\n        self.temp_total = 0\n\n    def process(self, items):\n        self.temp_total = sum(item.price for item in items)\n        return self.temp_total",
+    "after": "class OrderProcessor:\n    def __init__(self):\n        self.calculator = OrderCalculator()\n\n    def process(self, items):\n        return self.calculator.total(items)\n\n\nclass OrderCalculator:\n    def total(self, items):\n        return sum(item.price for item in items)",
+    "why": "A temporary field is removed from the long-lived object and localized into a helper."
+  },
+  {
+    "smell": "Temporary Field",
+    "strategy": "extract_class",
+    "before": "class ReportBuilder:\n    def __init__(self):\n        self.current_lines = []\n\n    def build(self, rows):\n        self.current_lines = [row.name for row in rows]\n        return self.current_lines",
+    "after": "class ReportBuilder:\n    def __init__(self):\n        self.line_builder = ReportLineBuilder()\n\n    def build(self, rows):\n        return self.line_builder.build(rows)\n\n\nclass ReportLineBuilder:\n    def build(self, rows):\n        return [row.name for row in rows]",
+    "why": "Temporary construction state is moved into a dedicated collaborator."
+  },
+  {
+    "smell": "Temporary Field",
+    "strategy": "extract_class",
+    "before": "class Billing:\n    def __init__(self):\n        self.discount_value = 0\n\n    def total(self, amount):\n        self.discount_value = amount * 0.1\n        return amount - self.discount_value",
+    "after": "class Billing:\n    def __init__(self):\n        self.discount_calculator = DiscountCalculator()\n\n    def total(self, amount):\n        discount_value = self.discount_calculator.calculate(amount)\n        return amount - discount_value\n\n\nclass DiscountCalculator:\n    def calculate(self, amount):\n        return amount * 0.1",
+    "why": "The temporary discount state is localized instead of stored on the main object."
+  }
+]

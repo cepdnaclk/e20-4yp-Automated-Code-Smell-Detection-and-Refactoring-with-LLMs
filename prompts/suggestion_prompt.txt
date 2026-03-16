@@ -1,0 +1,13 @@
+You are a senior software engineer.
+
+Smell Type: {{SMELL_TYPE}}
+Severity: {{SEVERITY}}
+Metrics: {{METRICS}}
+
+Explain:
+1. What this smell means
+2. Why it is a problem in this code
+3. Suggested refactoring actions
+
+Code:
+{{RAW_CODE}}

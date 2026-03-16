@@ -1,0 +1,45 @@
+﻿[
+  {
+    "smell": "Duplicate Code",
+    "strategy": "extract_method",
+    "before": "static void writeJvmClass(JvmClass c, DataOutput out) throws IOException {\n    int n = 0;\n    for (String i : c.getInterfaces()) n++;\n    DataInputOutputUtil.writeINT(out, n);\n    for (String i : c.getInterfaces()) out.writeUTF(i);\n    int m = 0;\n    for (JvmField f : c.getFields()) m++;\n    DataInputOutputUtil.writeINT(out, m);\n    for (JvmField f : c.getFields()) writeJvmField(f, out);\n}\n",
+    "after": "static void writeJvmClass(JvmClass c, DataOutput out) throws IOException {\n    writeInterfaces(c, out);\n    writeFields(c, out);\n}\n\nstatic void writeInterfaces(JvmClass c, DataOutput out) throws IOException {\n    int n = 0;\n    for (String i : c.getInterfaces()) n++;\n    DataInputOutputUtil.writeINT(out, n);\n    for (String i : c.getInterfaces()) out.writeUTF(i);\n}\n\nstatic void writeFields(JvmClass c, DataOutput out) throws IOException {\n    int m = 0;\n    for (JvmField f : c.getFields()) m++;\n    DataInputOutputUtil.writeINT(out, m);\n    for (JvmField f : c.getFields()) writeJvmField(f, out);\n}\n",
+    "why": "Adapted from a real Kotlin serialization refactoring.",
+    "source_project": "JetBrains Kotlin",
+    "source_url": "https://github.com/llm-refactoring/llm-refactoring-plugin",
+    "source_notes": "Adapted from the writeJvmClass EM-Assist prompt example.",
+    "adapted_from_real_world": true
+  },
+  {
+    "smell": "Duplicate Code",
+    "strategy": "extract_method",
+    "before": "def total_a(items):\n    total = 0\n    for item in items:\n        total += item.price\n    return total\n\n\ndef total_b(items):\n    total = 0\n    for item in items:\n        total += item.price\n    return total",
+    "after": "def total_a(items):\n    return compute_total(items)\n\n\ndef total_b(items):\n    return compute_total(items)\n\n\ndef compute_total(items):\n    total = 0\n    for item in items:\n        total += item.price\n    return total",
+    "why": "The repeated loop is extracted into one shared helper, removing duplication.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Duplicate Code",
+    "strategy": "extract_method",
+    "before": "def print_customer(customer):\n    print(customer.name)\n    print(customer.email)\n\n\ndef print_supplier(supplier):\n    print(supplier.name)\n    print(supplier.email)",
+    "after": "def print_customer(customer):\n    print_contact(customer)\n\n\ndef print_supplier(supplier):\n    print_contact(supplier)\n\n\ndef print_contact(contact):\n    print(contact.name)\n    print(contact.email)",
+    "why": "The repeated print sequence is extracted into one reusable operation.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Duplicate Code",
+    "strategy": "extract_method",
+    "before": "def active_names(users):\n    result = []\n    for user in users:\n        if user.active:\n            result.append(user.name)\n    return result\n\n\ndef active_ids(users):\n    result = []\n    for user in users:\n        if user.active:\n            result.append(user.id)\n    return result",
+    "after": "def active_names(users):\n    return collect_active(users, lambda user: user.name)\n\n\ndef active_ids(users):\n    return collect_active(users, lambda user: user.id)\n\n\ndef collect_active(users, mapper):\n    result = []\n    for user in users:\n        if user.active:\n            result.append(mapper(user))\n    return result",
+    "why": "The duplicated filtering loop is centralized with a small variation point.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Duplicate Code",
+    "strategy": "extract_method",
+    "before": "def customer_line(customer):\n    return customer.name + '|' + customer.email\n\n\ndef supplier_line(supplier):\n    return supplier.name + '|' + supplier.email",
+    "after": "def customer_line(customer):\n    return contact_line(customer)\n\n\ndef supplier_line(supplier):\n    return contact_line(supplier)\n\n\ndef contact_line(contact):\n    return contact.name + '|' + contact.email",
+    "why": "A repeated formatting pattern is extracted into one helper.",
+    "adapted_from_real_world": false
+  }
+]

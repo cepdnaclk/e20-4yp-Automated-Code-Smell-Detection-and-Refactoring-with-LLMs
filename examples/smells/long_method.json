@@ -1,0 +1,48 @@
+﻿[
+  {
+    "smell": "Long Method",
+    "strategy": "extract_method",
+    "before": "public void connect(Figure figure) {\n    if (fObservedFigure != null)\n        fObservedFigure.removeFigureChangeListener(this);\n\n    fObservedFigure = figure;\n    fLocator = new OffsetLocator(figure.connectedTextLocator(this));\n    fObservedFigure.addFigureChangeListener(this);\n    if (fLocator != null) {\n        Point p = fLocator.locate(fObservedFigure);\n        p.x -= size().width/2 + fOriginX;\n        p.y -= size().height/2 + fOriginY;\n        if (p.x != 0 || p.y != 0) {\n            willChange();\n            basicMoveBy(p.x, p.y);\n            changed();\n        }\n    }\n}",
+    "after": "public void connect(Figure figure) {\n    if (fObservedFigure != null)\n        fObservedFigure.removeFigureChangeListener(this);\n\n    fObservedFigure = figure;\n    fLocator = new OffsetLocator(figure.connectedTextLocator(this));\n    fObservedFigure.addFigureChangeListener(this);\n    updateLocatorPosition();\n}\n\nprivate void updateLocatorPosition() {\n    if (fLocator != null) {\n        Point p = fLocator.locate(fObservedFigure);\n        p.x -= size().width/2 + fOriginX;\n        p.y -= size().height/2 + fOriginY;\n        if (p.x != 0 || p.y != 0) {\n            willChange();\n            basicMoveBy(p.x, p.y);\n            changed();\n        }\n    }\n}",
+    "why": "Adapted from a real JHotDraw Extract Method example.",
+    "source_project": "JHotDraw",
+    "source_url": "https://github.com/llm-refactoring/llm-refactoring-plugin",
+    "source_notes": "Adapted from the JHotDraw connect(Figure) EM-Assist prompt example.",
+    "adapted_from_real_world": true
+  },
+  {
+    "smell": "Long Method",
+    "strategy": "extract_method",
+    "before": "static void writeJvmClass(JvmClass jvmClass, DataOutput out) throws IOException {\n    writeJVMClassNode(jvmClass, out);\n    out.writeUTF(jvmClass.getSuperFqName());\n    out.writeUTF(jvmClass.getOuterFqName());\n    int interfacesCount = 0;\n    for (String myInterface : jvmClass.getInterfaces()) interfacesCount++;\n    DataInputOutputUtil.writeINT(out, interfacesCount);\n    for (String myInterface : jvmClass.getInterfaces()) out.writeUTF(myInterface);\n    int fieldsCount = 0;\n    for (JvmField field : jvmClass.getFields()) fieldsCount++;\n    DataInputOutputUtil.writeINT(out, fieldsCount);\n    for (JvmField field : jvmClass.getFields()) writeJvmField(field, out);\n}",
+    "after": "static void writeJvmClass(JvmClass jvmClass, DataOutput out) throws IOException {\n    writeJVMClassNode(jvmClass, out);\n    out.writeUTF(jvmClass.getSuperFqName());\n    out.writeUTF(jvmClass.getOuterFqName());\n    writeInterfaces(jvmClass, out);\n    writeFields(jvmClass, out);\n}\n\nstatic void writeInterfaces(JvmClass jvmClass, DataOutput out) throws IOException {\n    int interfacesCount = 0;\n    for (String myInterface : jvmClass.getInterfaces()) interfacesCount++;\n    DataInputOutputUtil.writeINT(out, interfacesCount);\n    for (String myInterface : jvmClass.getInterfaces()) out.writeUTF(myInterface);\n}\n\nstatic void writeFields(JvmClass jvmClass, DataOutput out) throws IOException {\n    int fieldsCount = 0;\n    for (JvmField field : jvmClass.getFields()) fieldsCount++;\n    DataInputOutputUtil.writeINT(out, fieldsCount);\n    for (JvmField field : jvmClass.getFields()) writeJvmField(field, out);\n}",
+    "why": "Adapted from a real Kotlin Extract Method example.",
+    "source_project": "JetBrains Kotlin",
+    "source_url": "https://github.com/llm-refactoring/llm-refactoring-plugin",
+    "source_notes": "Adapted from the writeJvmClass EM-Assist prompt example.",
+    "adapted_from_real_world": true
+  },
+  {
+    "smell": "Long Method",
+    "strategy": "extract_method",
+    "before": "def generate_invoice(customer, items):\n    lines = []\n    total = 0\n    for item in items:\n        line_total = item.price * item.qty\n        total += line_total\n        lines.append(f'{item.name}: {line_total}')\n    print(customer.name)\n    for line in lines:\n        print(line)\n    print(total)\n    return total",
+    "after": "def generate_invoice(customer, items):\n    lines, total = build_invoice_lines(items)\n    print_invoice(customer, lines, total)\n    return total\n\n\ndef build_invoice_lines(items):\n    lines = []\n    total = 0\n    for item in items:\n        line_total = item.price * item.qty\n        total += line_total\n        lines.append(f'{item.name}: {line_total}')\n    return lines, total\n\n\ndef print_invoice(customer, lines, total):\n    print(customer.name)\n    for line in lines:\n        print(line)\n    print(total)",
+    "why": "Separates data preparation from output formatting.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Long Method",
+    "strategy": "extract_method",
+    "before": "def summarize(users):\n    names = []\n    for user in users:\n        if user.active:\n            names.append(user.name.upper())\n    print(len(names))\n    return names",
+    "after": "def summarize(users):\n    names = collect_active_names(users)\n    print(len(names))\n    return names\n\n\ndef collect_active_names(users):\n    names = []\n    for user in users:\n        if user.active:\n            names.append(user.name.upper())\n    return names",
+    "why": "Extracts the branch-heavy loop into a helper to shorten the main method.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Long Method",
+    "strategy": "extract_method",
+    "before": "def finalize_order(order):\n    total = 0\n    for item in order.items:\n        total += item.price * item.qty\n    if order.priority:\n        total += 15\n    print(order.id)\n    print(total)\n    return total",
+    "after": "def finalize_order(order):\n    total = compute_order_total(order)\n    print_order_totals(order, total)\n    return total\n\n\ndef compute_order_total(order):\n    total = 0\n    for item in order.items:\n        total += item.price * item.qty\n    if order.priority:\n        total += 15\n    return total\n\n\ndef print_order_totals(order, total):\n    print(order.id)\n    print(total)",
+    "why": "Separates computation and output into helpers, reducing method length.",
+    "adapted_from_real_world": false
+  }
+]

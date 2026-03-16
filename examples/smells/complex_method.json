@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Complex Method",
+    "strategy": "extract_method",
+    "before": "def build_summary(records):\n    result = []\n    for record in records:\n        if record.active and record.score > 10:\n            result.append(record.name.upper())\n    return ', '.join(result)",
+    "after": "def build_summary(records):\n    return ', '.join(collect_summary_names(records))\n\n\ndef collect_summary_names(records):\n    result = []\n    for record in records:\n        if record.active and record.score > 10:\n            result.append(record.name.upper())\n    return result",
+    "why": "The data collection logic is extracted to make the method easier to understand."
+  },
+  {
+    "smell": "Complex Method",
+    "strategy": "extract_method",
+    "before": "def prepare_emails(users):\n    emails = []\n    for user in users:\n        if user.active and user.email:\n            emails.append(user.email.lower())\n    return emails",
+    "after": "def prepare_emails(users):\n    return collect_active_emails(users)\n\n\ndef collect_active_emails(users):\n    emails = []\n    for user in users:\n        if user.active and user.email:\n            emails.append(user.email.lower())\n    return emails",
+    "why": "The main method is simplified by extracting the loop and condition logic."
+  },
+  {
+    "smell": "Complex Method",
+    "strategy": "extract_method",
+    "before": "def active_totals(items):\n    total = 0\n    for item in items:\n        if item.enabled and item.qty > 0:\n            total += item.qty * item.price\n    return total",
+    "after": "def active_totals(items):\n    return calculate_active_totals(items)\n\n\ndef calculate_active_totals(items):\n    total = 0\n    for item in items:\n        if item.enabled and item.qty > 0:\n            total += item.qty * item.price\n    return total",
+    "why": "Extracting the branch-heavy loop reduces perceived method complexity."
+  }
+]

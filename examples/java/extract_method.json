@@ -1,0 +1,9 @@
+﻿[
+  {
+    "smell": "Long Method",
+    "strategy": "extract_method",
+    "before": "public int total(int[] values) {\n    int sum = 0;\n    for (int value : values) {\n        if (value > 0) {\n            sum += value;\n        }\n    }\n    return sum;\n}",
+    "after": "public int total(int[] values) {\n    return sumPositive(values);\n}\n\nprivate int sumPositive(int[] values) {\n    int sum = 0;\n    for (int value : values) {\n        if (value > 0) {\n            sum += value;\n        }\n    }\n    return sum;\n}",
+    "why": "The detailed loop is extracted into a helper, leaving the main method easier to understand."
+  }
+]

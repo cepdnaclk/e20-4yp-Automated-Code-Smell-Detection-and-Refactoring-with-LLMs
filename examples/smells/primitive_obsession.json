@@ -1,0 +1,45 @@
+﻿[
+  {
+    "smell": "Primitive Obsession",
+    "strategy": "replace_primitive_with_value_object",
+    "before": "public string FormatPrice(decimal amount, string currency) {\n    return $\"{currency} {amount:F2}\";\n}",
+    "after": "public readonly record struct Money(decimal Amount, string Currency);\n\npublic string FormatPrice(Money money) {\n    return $\"{money.Currency} {money.Amount:F2}\";\n}",
+    "why": "Adapted from public OSS libraries that replace primitive IDs and value pairs with strongly typed value objects.",
+    "source_project": "SteveDunn/Vogen",
+    "source_url": "https://github.com/SteveDunn/Vogen",
+    "source_notes": "Adapted from the project's strongly typed value object approach for replacing primitive values with domain-specific types.",
+    "adapted_from_real_world": true
+  },
+  {
+    "smell": "Primitive Obsession",
+    "strategy": "replace_primitive_with_value_object",
+    "before": "def shipping_label(street, city):\n    return f'{street}, {city}'",
+    "after": "class Address:\n    def __init__(self, street, city):\n        self.street = street\n        self.city = city\n\n\ndef shipping_label(address):\n    return f'{address.street}, {address.city}'",
+    "why": "Address fields are grouped into one meaningful value object.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Primitive Obsession",
+    "strategy": "replace_primitive_with_value_object",
+    "before": "def full_name(first_name, last_name):\n    return first_name + ' ' + last_name",
+    "after": "class PersonName:\n    def __init__(self, first_name, last_name):\n        self.first_name = first_name\n        self.last_name = last_name\n\n\ndef full_name(name):\n    return name.first_name + ' ' + name.last_name",
+    "why": "A pair of related primitives is replaced with a richer, self-describing object.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Primitive Obsession",
+    "strategy": "replace_primitive_with_value_object",
+    "before": "def is_allowed(role_code):\n    return role_code in {'ADM', 'OPS'}",
+    "after": "class Role:\n    def __init__(self, code):\n        self.code = code\n\n    def is_privileged(self):\n        return self.code in {'ADM', 'OPS'}\n\n\ndef is_allowed(role):\n    return role.is_privileged()",
+    "why": "A raw role code is replaced with a small value object that owns role behavior.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Primitive Obsession",
+    "strategy": "replace_primitive_with_value_object",
+    "before": "def discount(price, currency):\n    return f'{currency} {price * 0.9:.2f}'",
+    "after": "class Money:\n    def __init__(self, amount, currency):\n        self.amount = amount\n        self.currency = currency\n\n    def discounted(self, factor):\n        return Money(self.amount * factor, self.currency)\n\n\ndef discount(money):\n    return money.discounted(0.9)",
+    "why": "Price and currency stop traveling as unrelated primitives and become one domain value.",
+    "adapted_from_real_world": false
+  }
+]

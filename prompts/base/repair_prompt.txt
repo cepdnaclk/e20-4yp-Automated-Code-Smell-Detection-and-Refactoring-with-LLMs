@@ -1,0 +1,50 @@
+﻿The previous refactoring output failed validation.
+
+Repair Goal:
+Fix the validation problems while preserving the intended refactoring.
+
+Project Context:
+- Language: {{LANGUAGE}}
+- Smell Type: {{SMELL_TYPE}}
+- Strategy: {{STRATEGY}}
+- Location: {{LOCATION}}
+
+Focused Scope Note:
+{{SCOPE_NOTE}}
+
+Focused Scope:
+{{FOCUSED_SCOPE}}
+
+Plan Summary:
+{{PLAN_SUMMARY}}
+
+Few-Shot Examples:
+{{FEW_SHOT_EXAMPLES}}
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Smell-Specific Guidance:
+{{SMELL_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Validation Errors:
+{{ERRORS}}
+
+Invalid Previous Output:
+{{INVALID_OUTPUT}}
+
+Repair Rules:
+- Correct only what is necessary to make the code valid.
+- Preserve the original refactoring intent and focused scope.
+- Do not revert to the unrefactored version unless required for correctness.
+- Keep names and structure clean.
+- Return the full corrected file.
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Original Code:
+{{RAW_CODE}}
