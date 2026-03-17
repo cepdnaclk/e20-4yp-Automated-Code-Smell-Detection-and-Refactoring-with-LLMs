@@ -1,34 +1,31 @@
-import subprocess
+import joblib
 import pandas as pd
+import subprocess
+
+MODEL_PATH = "backend/models/ml_smell_model.pkl"
+
+model = joblib.load(MODEL_PATH)
 
 
-def extract_metrics(java_file):
+def extract_metrics():
 
-    try:
+    subprocess.run([
+        "java",
+        "-jar",
+        "tools/ck.jar",
+        "temp_processing",
+        "true",
+        "0",
+        "false"
+    ])
 
-        cmd = [
-            "java",
-            "-jar",
-            "tools/ck.jar",
-            "temp_processing",
-            "true",
-            "0",
-            "false"
-        ]
-
-        subprocess.run(cmd)
-
-        df = pd.read_csv("class.csv")
-
-        return df
-
-    except:
-        return None
+    df = pd.read_csv("class.csv")
+    return df
 
 
 def detect_metric(java_file):
 
-    df = extract_metrics(java_file)
+    df = extract_metrics()
 
     if df is None:
         return []
@@ -36,17 +33,31 @@ def detect_metric(java_file):
     smells = []
 
     try:
+        features = df[["WMC", "CBO", "LOC", "LCOM", "RFC"]]
 
-        if df["WMC"].iloc[0] > 50:
-            smells.append("Complex Method")
+        predictions = model.predict(features)
 
-        if df["LOC"].iloc[0] > 500:
-            smells.append("Large Class")
+        for pred in predictions:
 
-        if df["CBO"].iloc[0] > 14:
-            smells.append("Hub Like Dependency")
+            if pred == 1:
+                smells.append("Large Class")
+
+            elif pred == 2:
+                smells.append("Complex Method")
+
+            elif pred == 3:
+                smells.append("God Class")
+
+            elif pred == 4:
+                smells.append("Feature Envy")
+
+            elif pred == 5:
+                smells.append("Data Class")
+
+            elif pred == 6:
+                smells.append("Lazy Class")
 
     except:
         pass
 
-    return smells
+    return list(set(smells))
