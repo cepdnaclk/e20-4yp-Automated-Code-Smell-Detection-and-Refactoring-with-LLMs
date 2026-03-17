@@ -1,6 +1,10 @@
-venv/ 
-.venv/ 
-__pycache__/ 
-*.pyc 
-outputs/ 
-uploads/ 
+venv/
+.venv/
+__pycache__/
+*.pyc
+outputs/
+uploads/
+temp_processing/
+dataset/
+source_repos/
+temp_batch/

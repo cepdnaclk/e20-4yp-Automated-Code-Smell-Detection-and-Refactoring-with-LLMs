@@ -1,0 +1,296 @@
+class_name,project,metrics,actual_smells,source_code,llm_output
+Context,Unknown,LOC:10 WMC:2,"{""Broken Hierarchy"",""Broken Modularization"",""Cyclic Hierarchy"",""Cyclically-dependent Modularization"",""Deficient Encapsulation"",""Duplicate Abstraction"",""Feature Envy"",""Hub-like Modularization"",""Imperative Abstraction"",""Insufficient Modularization"",""Missing Hierarchy"",""Multifaceted Abstraction"",""Rebellious Hierarchy"",""Unexploited Encapsulation"",""Unfactored Hierarchy"",""Unnecessary Abstraction"",""Unutilized Abstraction"",""Wide Hierarchy""}","///////////////////////////////////////////////////////////////////////////////////////////////
+// checkstyle: Checks Java source code and other text files for adherence to a set of rules.
+// Copyright (C) 2001-2026 the original author or authors.
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.puppycrawl.tools.checkstyle.api;
+
+import java.util.Collection;
+
+/**
+ * A context to be used in subcomponents. The general idea of
+ * Context/Contextualizable was taken from <a target=""_top""
+ * href=""https://avalon.apache.org/closed.html"">Jakarta's Avalon framework</a>.
+ *
+ * @see Contextualizable
+ */
+public interface Context {
+
+    /**
+     * Searches for the value with the specified attribute key in this context.
+     *
+     * @param key the attribute key.
+     * @return the value in this context with the specified attribute key value.
+     */
+    Object get(String key);
+
+    /**
+     * Returns the names of all attributes of this context.
+     *
+     * @return the names of all attributes of this context.
+     */
+    Collection<String> getAttributeNames();
+
+}
+","Here are the JSON objects for each smell identified in your Java code. Note that this is a generic format and might not cover all smells as some of them can have more specific details or contextual information about their detection (e.g., line numbers, method names). 
+
+1) Long Method - No Severity: There are no methods with length over X lines in the codebase which is a smell for long and complex functions/methods that could be broken down into smaller ones to improve readability or maintainability of your software design. The JSON object would look like this (assuming there's only one such method):
+```json
+{ 
+    ""smells"": [""LongMethod""],  
+}    
+ ```
+2) Feature Envy - High Severity: This smell indicates that a function is using too much of its parameters, which can be seen as an indication for over-complicated methods. The JSON object would look like this (assuming there's only one such method): 
+```json    {  
+""smells"": [""FeatureEnvy""],     ""severity"":""High"",      ""reason"":""The function is using too much of its parameters, which can be seen as an indication for over-complicated methods."" } ```
+3) Magic Strings - High Severity: This smell indicates that there are hardcoded strings in the codebase. These could potentially lead to bugs if not properly handled or replaced with appropriate constants/variables (e.g., using 'CONSTANTS' instead of magic numbers). The JSON object would look like this for one such string, assuming all occurrences have been identified:
+```json   {  ""smells"": [""MagicString""],    ""severity"":""High"",     ""reason"" : ""'Hardcoded strings in the codebase could potentially lead to bugs if not properly handled or replaced with appropriate constants/variables."" } ```
+"
+Context,Unknown,LOC:69 WMC:13,"{""Broken Hierarchy"",""Broken Modularization"",""Cyclic Hierarchy"",""Cyclically-dependent Modularization"",""Deficient Encapsulation"",""Duplicate Abstraction"",""Feature Envy"",""Hub-like Modularization"",""Imperative Abstraction"",""Insufficient Modularization"",""Missing Hierarchy"",""Multifaceted Abstraction"",""Rebellious Hierarchy"",""Unexploited Encapsulation"",""Unfactored Hierarchy"",""Unnecessary Abstraction"",""Unutilized Abstraction"",""Wide Hierarchy""}","///////////////////////////////////////////////////////////////////////////////////////////////
+// checkstyle: Checks Java source code and other text files for adherence to a set of rules.
+// Copyright (C) 2001-2026 the original author or authors.
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.puppycrawl.tools.checkstyle.api;
+
+import java.util.Collection;
+
+/**
+ * A context to be used in subcomponents. The general idea of
+ * Context/Contextualizable was taken from <a target=""_top""
+ * href=""https://avalon.apache.org/closed.html"">Jakarta's Avalon framework</a>.
+ *
+ * @see Contextualizable
+ */
+public interface Context {
+
+    /**
+     * Searches for the value with the specified attribute key in this context.
+     *
+     * @param key the attribute key.
+     * @return the value in this context with the specified attribute key value.
+     */
+    Object get(String key);
+
+    /**
+     * Returns the names of all attributes of this context.
+     *
+     * @return the names of all attributes of this context.
+     */
+    Collection<String> getAttributeNames();
+
+}
+","Here are the JSON objects for each smell identified in your code. Note that I've assumed a few things about how to categorize smells, but you may need more specifics based on what makes sense given context and requirements of this tool or project. 
+
+1) Long Method (LOC = 69): This is one common issue where methods are longer than they should be due to their complexity in terms of functionality/behavior rather than size within the codebase itself, which can make it difficult for others to understand what a method does without looking at its source. 
+```json
+{
+    ""smells"": [""LongMethod""],
+    ""severity"":""High"",
+    ""reason"" : ""Methods should be as short and simple as possible while still providing the desired functionality.""  
+}
+ ```    
+2) Feature Envy (WMC = 13): This is a common issue where methods are using features they do not actually use. It can lead to confusion for other developers reading your code, especially if you have used this feature in multiple places and it's hard to tell what the method does without looking at its source or contextual understanding of how these unseen dependencies affect behavior.
+```json 
+{   
+   ""smells"": [""FeatureEnvy""],
+   ""severity"":""High"",
+   ""reason"" : ""'feature envy', where a feature is used in multiple places but not explicitly stated.""    
+}     ```       
+3) Magic Strings (WMC = 1): This refers to the use of literal strings that are hard-coded into your code. These can be problematic for several reasons: they make it harder and more difficult to understand what a method does, if not directly related with its functionality; there's no way you could easily change these values without modifying many places in an application where this string is used as the main language of communication between developers or users.
+```json 
+{   
+   ""smells"": [""MagicString""],
+   ""severity"":""High"",
+   ""reason"" : ""'magic strings', hard-coded values that are not easily changed without impacting functionality.""    
+}     ```       
+Note: The severity of the smell is determined by how many times it occurs in your code. High means 1 or more occurrences, Medium would be around two to three instances and Low could only appear once per file/module if not used extensively enough for a high level of impact on maintainability (usually less than one).
+"
+Context,Unknown,LOC:29 WMC:7,"{""Broken Hierarchy"",""Broken Modularization"",""Cyclic Hierarchy"",""Cyclically-dependent Modularization"",""Deficient Encapsulation"",""Duplicate Abstraction"",""Feature Envy"",""Hub-like Modularization"",""Imperative Abstraction"",""Insufficient Modularization"",""Missing Hierarchy"",""Multifaceted Abstraction"",""Rebellious Hierarchy"",""Unexploited Encapsulation"",""Unfactored Hierarchy"",""Unnecessary Abstraction"",""Unutilized Abstraction"",""Wide Hierarchy""}","///////////////////////////////////////////////////////////////////////////////////////////////
+// checkstyle: Checks Java source code and other text files for adherence to a set of rules.
+// Copyright (C) 2001-2026 the original author or authors.
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.puppycrawl.tools.checkstyle.api;
+
+import java.util.Collection;
+
+/**
+ * A context to be used in subcomponents. The general idea of
+ * Context/Contextualizable was taken from <a target=""_top""
+ * href=""https://avalon.apache.org/closed.html"">Jakarta's Avalon framework</a>.
+ *
+ * @see Contextualizable
+ */
+public interface Context {
+
+    /**
+     * Searches for the value with the specified attribute key in this context.
+     *
+     * @param key the attribute key.
+     * @return the value in this context with the specified attribute key value.
+     */
+    Object get(String key);
+
+    /**
+     * Returns the names of all attributes of this context.
+     *
+     * @return the names of all attributes of this context.
+     */
+    Collection<String> getAttributeNames();
+
+}
+","Here is a JSON object that represents the given Java code snippet. The metrics provided are LOC (Lines of Code) and WMC (Weighted Method Count). In this case, there's only one smell identified as ""Long method"", with severity set to high because it can be considered an anti-pattern in terms of modularization or reusability that could potentially lead to code bloat.
+  
+```json 
+{   
+     ""smells"": [""Long Method""],
+      ""severity"" : ""High"",
+       ""reason"":""The method is too long and can be considered as an anti-pattern for the following reasons: it has more than a few lines of code, which makes maintenance difficult. It also might lead to confusion among other developers who may not understand what's going on."" 
+}   
+```  
+This JSON object represents one smell in this case and provides information about its severity (high) as well as why it is considered an anti-pattern for the given code snippet. The reason string could be further expanded to provide more detailed explanations of what exactly caused a particular issue with long methods, such as excessive use or overuse of parameters etc., depending on how much detail you want in your analysis and contextualization process itself (which is not covered by this JSON object).
+"
+Context,Unknown,LOC:16 WMC:4,"{""Broken Hierarchy"",""Broken Modularization"",""Cyclic Hierarchy"",""Cyclically-dependent Modularization"",""Deficient Encapsulation"",""Duplicate Abstraction"",""Feature Envy"",""Hub-like Modularization"",""Imperative Abstraction"",""Insufficient Modularization"",""Missing Hierarchy"",""Multifaceted Abstraction"",""Rebellious Hierarchy"",""Unexploited Encapsulation"",""Unfactored Hierarchy"",""Unnecessary Abstraction"",""Unutilized Abstraction"",""Wide Hierarchy""}","///////////////////////////////////////////////////////////////////////////////////////////////
+// checkstyle: Checks Java source code and other text files for adherence to a set of rules.
+// Copyright (C) 2001-2026 the original author or authors.
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.puppycrawl.tools.checkstyle.api;
+
+import java.util.Collection;
+
+/**
+ * A context to be used in subcomponents. The general idea of
+ * Context/Contextualizable was taken from <a target=""_top""
+ * href=""https://avalon.apache.org/closed.html"">Jakarta's Avalon framework</a>.
+ *
+ * @see Contextualizable
+ */
+public interface Context {
+
+    /**
+     * Searches for the value with the specified attribute key in this context.
+     *
+     * @param key the attribute key.
+     * @return the value in this context with the specified attribute key value.
+     */
+    Object get(String key);
+
+    /**
+     * Returns the names of all attributes of this context.
+     *
+     * @return the names of all attributes of this context.
+     */
+    Collection<String> getAttributeNames();
+
+}
+","Based on the provided code and metrics, there are no specific issues or smells to be identified. The METRICS provide a good balance between LOC (Lines of Code) for maintainability vs complexity in terms of functionality/logic while WMC stands as Weighted Method Count which measures how many methods an object is using the method count metric and thus, it's not directly related with smells or code quality.
+"
+Context,Unknown,LOC:94 WMC:16,"{""Broken Hierarchy"",""Broken Modularization"",""Cyclic Hierarchy"",""Cyclically-dependent Modularization"",""Deficient Encapsulation"",""Duplicate Abstraction"",""Feature Envy"",""Hub-like Modularization"",""Imperative Abstraction"",""Insufficient Modularization"",""Missing Hierarchy"",""Multifaceted Abstraction"",""Rebellious Hierarchy"",""Unexploited Encapsulation"",""Unfactored Hierarchy"",""Unnecessary Abstraction"",""Unutilized Abstraction"",""Wide Hierarchy""}","///////////////////////////////////////////////////////////////////////////////////////////////
+// checkstyle: Checks Java source code and other text files for adherence to a set of rules.
+// Copyright (C) 2001-2026 the original author or authors.
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.puppycrawl.tools.checkstyle.api;
+
+import java.util.Collection;
+
+/**
+ * A context to be used in subcomponents. The general idea of
+ * Context/Contextualizable was taken from <a target=""_top""
+ * href=""https://avalon.apache.org/closed.html"">Jakarta's Avalon framework</a>.
+ *
+ * @see Contextualizable
+ */
+public interface Context {
+
+    /**
+     * Searches for the value with the specified attribute key in this context.
+     *
+     * @param key the attribute key.
+     * @return the value in this context with the specified attribute key value.
+     */
+    Object get(String key);
+
+    /**
+     * Returns the names of all attributes of this context.
+     *
+     * @return the names of all attributes of this context.
+     */
+    Collection<String> getAttributeNames();
+
+}
+","Based on the provided code, there are no long methods or feature envy in this Java snippet. However, it does use magic strings which is not recommended for readability and maintainability of a program due to their presence inside comments that could be difficult to understand without context (e.g., ""Copyright 2019"").
+"
