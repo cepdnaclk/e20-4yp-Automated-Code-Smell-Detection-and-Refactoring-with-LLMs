@@ -1,7 +1,4 @@
 [
-    "Tight Coupling to Console Output",
-    "Inappropriate Method Name",
-    "Dead Code / Unused Method Parameter",
-    "Magic Number",
-    "Duplicate Code"
+    "Duplicate Code",
+    "Magic Number"
 ]
