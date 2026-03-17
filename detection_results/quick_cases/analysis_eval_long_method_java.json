@@ -1,0 +1,17 @@
+﻿{
+  "file_name": "EvalLongMethodJava.java",
+  "language": "Java",
+  "smells": [
+    {
+      "type": "Long Method",
+      "severity": "Major",
+      "location": "summarize",
+      "metrics": {
+        "method_name": "summarize",
+        "loc": 24,
+        "cyclomatic_complexity": 5,
+        "responsibilities": 4
+      }
+    }
+  ]
+}

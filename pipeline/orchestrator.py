@@ -1,4 +1,5 @@
 ﻿import json
+import re
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -37,7 +38,7 @@ def _load_code(payload: RefactorInput) -> str:
         return payload.code
     upload_path = UPLOADS_DIR / payload.file_name
     if upload_path.exists():
-        return upload_path.read_text(encoding="utf-8")
+        return upload_path.read_text(encoding="utf-8-sig")
     raise FileNotFoundError(f"Unable to locate code for {payload.file_name}")
 
 
@@ -170,3 +171,6 @@ def run_pipeline(
     OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
     output_path.write_text(_model_dump_json(output, indent=2), encoding="utf-8")
     return output
+
+
+

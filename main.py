@@ -17,7 +17,7 @@ def build_payload(analysis):
     if code is None:
         upload_path = UPLOADS_DIR / file_name
         if upload_path.exists():
-            code = upload_path.read_text(encoding="utf-8")
+            code = upload_path.read_text(encoding="utf-8-sig")
 
     return {
         "file_name": file_name,
@@ -39,4 +39,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 

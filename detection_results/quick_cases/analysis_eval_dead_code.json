@@ -1,0 +1,15 @@
+﻿{
+  "file_name": "eval_dead_code.py",
+  "language": "Python",
+  "smells": [
+    {
+      "type": "Dead Code",
+      "severity": "Moderate",
+      "location": "normalize_name",
+      "metrics": {
+        "unused_variables": 1,
+        "loc": 4
+      }
+    }
+  ]
+}
