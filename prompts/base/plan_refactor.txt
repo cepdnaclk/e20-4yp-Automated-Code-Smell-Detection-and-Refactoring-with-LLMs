@@ -1,0 +1,40 @@
+﻿You are preparing a minimal refactoring plan before code generation.
+
+Task Goal:
+{{REFACTORING_GOAL}}
+
+Project Context:
+- Language: {{LANGUAGE}}
+- File: {{FILE_NAME}}
+- Smell Type: {{SMELL_TYPE}}
+- Severity: {{SEVERITY}}
+- Location: {{LOCATION}}
+- Primary Strategy: {{STRATEGY}}
+- Metrics: {{METRICS}}
+
+Focused Scope Note:
+{{SCOPE_NOTE}}
+
+Focused Scope:
+{{FOCUSED_SCOPE}}
+
+Few-Shot Examples:
+{{FEW_SHOT_EXAMPLES}}
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Smell-Specific Guidance:
+{{SMELL_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Planning Rules:
+- Keep the plan short and concrete.
+- Focus only on the detected smell and the smallest safe changes.
+- Mention any public API risk if signatures may change.
+- Do not output refactored code yet.
+
+Output Contract:
+{{PLAN_OUTPUT_CONTRACT}}

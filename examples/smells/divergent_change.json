@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Divergent Change",
+    "strategy": "split_responsibilities",
+    "before": "class ProjectService:\n    def save(self, project):\n        print('saved')\n\n    def export(self, project):\n        print('exported')\n\n    def notify(self, project):\n        print('notified')",
+    "after": "class ProjectService:\n    def __init__(self):\n        self.exporter = ProjectExporter()\n        self.notifier = ProjectNotifier()\n\n    def save(self, project):\n        print('saved')\n\n    def export(self, project):\n        self.exporter.export(project)\n\n    def notify(self, project):\n        self.notifier.notify(project)\n\n\nclass ProjectExporter:\n    def export(self, project):\n        print('exported')\n\n\nclass ProjectNotifier:\n    def notify(self, project):\n        print('notified')",
+    "why": "Different reasons to change are split into separate classes."
+  },
+  {
+    "smell": "Divergent Change",
+    "strategy": "split_responsibilities",
+    "before": "class OrderManager:\n    def save(self, order):\n        print('saved')\n\n    def print_report(self, order):\n        print('report')\n\n    def send_mail(self, order):\n        print('mail')",
+    "after": "class OrderManager:\n    def __init__(self):\n        self.reporter = OrderReporter()\n        self.mailer = OrderMailer()\n\n    def save(self, order):\n        print('saved')\n\n    def print_report(self, order):\n        self.reporter.print_report(order)\n\n    def send_mail(self, order):\n        self.mailer.send(order)\n\n\nclass OrderReporter:\n    def print_report(self, order):\n        print('report')\n\n\nclass OrderMailer:\n    def send(self, order):\n        print('mail')",
+    "why": "Persistence, reporting, and email are separated into distinct responsibilities."
+  },
+  {
+    "smell": "Divergent Change",
+    "strategy": "split_responsibilities",
+    "before": "class EnrollmentService:\n    def enroll(self, student):\n        print('enrolled')\n\n    def invoice(self, student):\n        print('invoice')\n\n    def archive(self, student):\n        print('archive')",
+    "after": "class EnrollmentService:\n    def __init__(self):\n        self.billing = EnrollmentBilling()\n        self.archive_service = EnrollmentArchive()\n\n    def enroll(self, student):\n        print('enrolled')\n\n    def invoice(self, student):\n        self.billing.invoice(student)\n\n    def archive(self, student):\n        self.archive_service.archive(student)\n\n\nclass EnrollmentBilling:\n    def invoice(self, student):\n        print('invoice')\n\n\nclass EnrollmentArchive:\n    def archive(self, student):\n        print('archive')",
+    "why": "Separate change drivers are extracted into focused services."
+  }
+]

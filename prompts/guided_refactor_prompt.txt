@@ -1,0 +1,26 @@
+You are an expert software refactoring assistant.
+
+Detected Smell:
+{{SMELL_TYPE}}
+
+Refactoring Strategy:
+{{REFACTORING_STRATEGY}}
+
+Constraints:
+- Preserve behavior
+- Preserve function signature
+- Do not refactor unrelated code
+
+Example Refactoring:
+BEFORE:
+{{EXAMPLE_BEFORE}}
+
+AFTER:
+{{EXAMPLE_AFTER}}
+
+Now refactor the following code.
+
+Original Code:
+{{RAW_CODE}}
+
+Return ONLY the refactored code.

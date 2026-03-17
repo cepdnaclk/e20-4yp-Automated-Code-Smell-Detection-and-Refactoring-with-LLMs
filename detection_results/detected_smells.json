@@ -1,0 +1,45 @@
+{
+  "file_name": "manual_input.java",
+  "language": "Java",
+  "code": "class OrderProcessor:\n\n    # Long Parameter List + Long Method\n    def process_order(self, customer_name, customer_email, customer_address,\n                      product_id, product_name, product_price,\n                      quantity, discount, tax, shipping_cost):\n\n        total = 0\n\n        # Duplicate Code Block 1\n        if quantity > 0:\n            subtotal = product_price * quantity\n            if discount > 0:\n                subtotal = subtotal - (subtotal * discount)\n            subtotal = subtotal + (subtotal * tax)\n            total = subtotal + shipping_cost\n\n        # Duplicate Code Block 2 (same logic repeated)\n        if quantity > 0:\n            subtotal = product_price * quantity\n            if discount > 0:\n                subtotal = subtotal - (subtotal * discount)\n            subtotal = subtotal + (subtotal * tax)\n            total = subtotal + shipping_cost\n\n        # More logic (making method long)\n        if total > 100:\n            print(\"High value order\")\n        else:\n            print(\"Regular order\")\n\n        # More repeated logic (again duplicate)\n        if quantity > 0:\n            subtotal = product_price * quantity\n            if discount > 0:\n                subtotal = subtotal - (subtotal * discount)\n            subtotal = subtotal + (subtotal * tax)\n            total = subtotal + shipping_cost\n\n        return total",
+  "detected_smells": [
+    {
+      "smell": "Magic Number",
+      "supported_by": [
+        "static_engine"
+      ],
+      "evidence": [
+        "Static analysis detected Magic Number patterns."
+      ],
+      "location": "General"
+    }
+  ],
+  "engine_summary": {
+    "static_engine": [
+      "Magic Number"
+    ],
+    "metric_engine": [],
+    "llm_engine": []
+  },
+  "primary_smell": "Magic Number",
+  "category": "Implementation",
+  "priority_list": [
+    {
+      "smell": "Magic Number",
+      "category": "Implementation",
+      "supported_by": [
+        "static_engine"
+      ],
+      "explanation": "Magic Number was flagged by static_engine. Static analysis detected Magic Number patterns. This can reduce readability and maintainability if left unresolved.",
+      "location": "General",
+      "severity": "Major",
+      "severity_score": 0.6,
+      "smell_weight": 0.8,
+      "priority_score": 0.48,
+      "ui_severity": "2.4/5",
+      "evidence": [
+        "Static analysis detected Magic Number patterns."
+      ]
+    }
+  ]
+}

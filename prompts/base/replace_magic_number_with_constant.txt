@@ -1,0 +1,32 @@
+You are refactoring code to address the smell: {{SMELL_TYPE}}.
+
+Primary strategy: Replace Magic Number with Constant.
+
+Rules:
+- Preserve behavior.
+- Replace unexplained numeric literals with named constants.
+- Prefer constants near the relevant scope unless a wider scope is clearly better.
+- Do not replace trivial literals such as 0 or 1 unless the domain meaning is important.
+- Do not rewrite unrelated parts of the code.
+- Return only the final refactored code.
+
+Language-specific rules:
+{{LANGUAGE_RULES}}
+
+Strategy guidance:
+{{STRATEGY_GUIDANCE}}
+
+Smell guidance:
+{{SMELL_GUIDANCE}}
+
+Few-shot examples:
+{{FEW_SHOT_EXAMPLES}}
+
+Focused scope note:
+{{SCOPE_NOTE}}
+
+Focused scope:
+{{FOCUSED_SCOPE}}
+
+Full code:
+{{RAW_CODE}}

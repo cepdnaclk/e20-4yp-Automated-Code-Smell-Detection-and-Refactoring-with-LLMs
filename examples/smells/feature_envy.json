@@ -1,0 +1,42 @@
+﻿[
+  {
+    "smell": "Feature Envy",
+    "strategy": "move_method",
+    "before": "class CustomerReport:\n    def loyalty_summary(self, customer):\n        return customer.name + ' - ' + customer.loyalty_level + ' - ' + str(customer.points)",
+    "after": "class CustomerReport:\n    def loyalty_summary(self, customer):\n        return customer.loyalty_summary()\n\n\nclass Customer:\n    def loyalty_summary(self):\n        return self.name + ' - ' + self.loyalty_level + ' - ' + str(self.points)",
+    "why": "The formatting logic uses only Customer data, so moving it to Customer improves cohesion.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Feature Envy",
+    "strategy": "move_method",
+    "before": "class InvoiceService:\n    def shipping_city(self, order):\n        return order.customer.address.city.upper()",
+    "after": "class InvoiceService:\n    def shipping_city(self, order):\n        return order.shipping_city()\n\n\nclass Order:\n    def shipping_city(self):\n        return self.customer.address.city.upper()",
+    "why": "The method mostly navigates Order internals, so it belongs closer to the Order object.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Feature Envy",
+    "strategy": "move_method",
+    "before": "class PayrollView:\n    def employee_label(self, employee):\n        return employee.department + ':' + employee.role + ':' + str(employee.salary)",
+    "after": "class PayrollView:\n    def employee_label(self, employee):\n        return employee.label()\n\n\nclass Employee:\n    def label(self):\n        return self.department + ':' + self.role + ':' + str(self.salary)",
+    "why": "The label logic depends entirely on Employee state, so moving it removes the envy smell.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Feature Envy",
+    "strategy": "move_method",
+    "before": "class ShippingView:\n    def postal_code(self, shipment):\n        return shipment.address.postal_code",
+    "after": "class ShippingView:\n    def postal_code(self, shipment):\n        return shipment.postal_code()\n\n\nclass Shipment:\n    def postal_code(self):\n        return self.address.postal_code",
+    "why": "The behavior is moved closer to the data it depends on.",
+    "adapted_from_real_world": false
+  },
+  {
+    "smell": "Feature Envy",
+    "strategy": "move_method",
+    "before": "class ProjectSummary:\n    def manager_email(self, project):\n        return project.team.manager.email",
+    "after": "class ProjectSummary:\n    def manager_email(self, project):\n        return project.manager_email()\n\n\nclass Project:\n    def manager_email(self):\n        return self.team.manager.email",
+    "why": "The caller no longer reaches through another object graph to compute the value.",
+    "adapted_from_real_world": false
+  }
+]

@@ -1,0 +1,14 @@
+Explain the refactoring below.
+
+Smell: {{SMELL_TYPE}}
+
+Before:
+{{BEFORE_CODE}}
+
+After:
+{{AFTER_CODE}}
+
+Explain:
+1. What changed
+2. How the smell was removed
+3. Benefits

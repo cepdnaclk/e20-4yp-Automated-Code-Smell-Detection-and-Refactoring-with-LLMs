@@ -1,0 +1,37 @@
+﻿You are refactoring a Long Method.
+
+Task Goal:
+{{REFACTORING_GOAL}}
+
+Focused Scope Note:
+{{SCOPE_NOTE}}
+
+Focused Scope:
+{{FOCUSED_SCOPE}}
+
+Plan Summary:
+{{PLAN_SUMMARY}}
+
+Priorities:
+- Keep the original method or function signature unless impossible.
+- Extract the largest cohesive steps into small, named helpers.
+- Preserve execution order and side effects.
+- Keep the main method as the orchestration layer.
+
+Few-Shot Examples:
+{{FEW_SHOT_EXAMPLES}}
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Smell-Specific Guidance:
+{{SMELL_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Original Code:
+{{RAW_CODE}}

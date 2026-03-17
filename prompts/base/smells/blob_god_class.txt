@@ -1,0 +1,36 @@
+﻿You are refactoring a Blob (God Class).
+
+Task Goal:
+{{REFACTORING_GOAL}}
+
+Focused Scope Note:
+{{SCOPE_NOTE}}
+
+Focused Scope:
+{{FOCUSED_SCOPE}}
+
+Plan Summary:
+{{PLAN_SUMMARY}}
+
+Priorities:
+- Extract one cohesive responsibility into a focused collaborator.
+- Move only the methods and fields needed for that responsibility.
+- Preserve the original class as a coordinator instead of rewriting everything.
+
+Few-Shot Examples:
+{{FEW_SHOT_EXAMPLES}}
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Smell-Specific Guidance:
+{{SMELL_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Original Code:
+{{RAW_CODE}}

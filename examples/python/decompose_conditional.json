@@ -1,0 +1,9 @@
+﻿[
+  {
+    "smell": "Complex Conditional",
+    "strategy": "decompose_conditional",
+    "before": "def discount(customer_type, total):\n    if customer_type == 'VIP' and total > 500 or customer_type == 'REGULAR' and total > 1000:\n        return total * 0.1\n    return 0",
+    "after": "def discount(customer_type, total):\n    if is_discount_eligible(customer_type, total):\n        return total * 0.1\n    return 0\n\n\ndef is_discount_eligible(customer_type, total):\n    return (customer_type == 'VIP' and total > 500) or (customer_type == 'REGULAR' and total > 1000)",
+    "why": "The conditional intent is extracted into a named helper, making the business rule easier to understand."
+  }
+]

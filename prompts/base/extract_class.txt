@@ -1,0 +1,22 @@
+﻿You are refactoring code for the smell {{SMELL_TYPE}} using the strategy {{STRATEGY}}.
+
+Goal:
+{{REFACTORING_GOAL}}
+
+Specific Instructions:
+- Identify responsibilities that do not belong together.
+- Move related fields and methods into a new focused class only if it improves cohesion.
+- Keep class responsibilities explicit and minimal.
+- Preserve external behavior and existing collaborations.
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Code:
+{{RAW_CODE}}

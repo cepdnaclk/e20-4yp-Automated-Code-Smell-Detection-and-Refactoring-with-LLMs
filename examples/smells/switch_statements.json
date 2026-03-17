@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Switch Statements",
+    "strategy": "replace_conditional_with_polymorphism",
+    "before": "def area(shape_type, width, height):\n    if shape_type == 'rectangle':\n        return width * height\n    return width * width",
+    "after": "class Rectangle:\n    def __init__(self, width, height):\n        self.width = width\n        self.height = height\n\n    def area(self):\n        return self.width * self.height\n\n\nclass Square:\n    def __init__(self, width):\n        self.width = width\n\n    def area(self):\n        return self.width * self.width",
+    "why": "Type-specific behavior is moved into separate classes instead of a conditional."
+  },
+  {
+    "smell": "Switch Statements",
+    "strategy": "replace_conditional_with_polymorphism",
+    "before": "def pay(kind, amount):\n    if kind == 'contract':\n        return amount\n    return amount * 0.9",
+    "after": "class ContractEmployee:\n    def pay(self, amount):\n        return amount\n\n\nclass SalariedEmployee:\n    def pay(self, amount):\n        return amount * 0.9",
+    "why": "Each case becomes its own polymorphic implementation."
+  },
+  {
+    "smell": "Switch Statements",
+    "strategy": "replace_conditional_with_polymorphism",
+    "before": "def shipping(mode, total):\n    if mode == 'express':\n        return total + 15\n    return total + 5",
+    "after": "class ExpressShipping:\n    def total(self, amount):\n        return amount + 15\n\n\nclass StandardShipping:\n    def total(self, amount):\n        return amount + 5",
+    "why": "Branching by mode is replaced with type-based behavior."
+  }
+]

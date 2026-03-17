@@ -1,0 +1,15 @@
+﻿{
+  "file_name": "eval_data_clumps.py",
+  "language": "Python",
+  "smells": [
+    {
+      "type": "Data Clumps",
+      "severity": "Major",
+      "location": "create_label",
+      "metrics": {
+        "repeated_parameter_group": 4,
+        "loc": 10
+      }
+    }
+  ]
+}

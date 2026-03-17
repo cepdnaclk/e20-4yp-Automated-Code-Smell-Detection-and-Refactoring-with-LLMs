@@ -1,0 +1,21 @@
+﻿You are refactoring code for the smell {{SMELL_TYPE}} using the strategy {{STRATEGY}}.
+
+Goal:
+{{REFACTORING_GOAL}}
+
+Specific Instructions:
+- Replace deeply nested or complex branching with clearer named checks or helper methods.
+- Prefer readability and behavior preservation over novelty.
+- Keep the simplified conditional logic easy to follow.
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Code:
+{{RAW_CODE}}

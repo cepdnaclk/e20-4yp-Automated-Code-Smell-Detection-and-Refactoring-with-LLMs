@@ -1,7 +1,10 @@
 venv/
+.venv/
 __pycache__/
 *.pyc
-temp_processing/*
+outputs/
+uploads/
+temp_processing/
 dataset/
 source_repos/
 temp_batch/

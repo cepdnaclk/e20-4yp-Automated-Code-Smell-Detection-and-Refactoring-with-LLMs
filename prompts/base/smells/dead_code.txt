@@ -1,0 +1,36 @@
+﻿You are refactoring Dead Code.
+
+Task Goal:
+{{REFACTORING_GOAL}}
+
+Focused Scope Note:
+{{SCOPE_NOTE}}
+
+Focused Scope:
+{{FOCUSED_SCOPE}}
+
+Plan Summary:
+{{PLAN_SUMMARY}}
+
+Priorities:
+- Remove only code that is clearly unused, unreachable, or redundant in the provided context.
+- Avoid changing active logic or public behavior.
+- Prefer the smallest safe cleanup.
+
+Few-Shot Examples:
+{{FEW_SHOT_EXAMPLES}}
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Smell-Specific Guidance:
+{{SMELL_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Original Code:
+{{RAW_CODE}}

@@ -1,0 +1,36 @@
+﻿You are refactoring Primitive Obsession.
+
+Task Goal:
+{{REFACTORING_GOAL}}
+
+Focused Scope Note:
+{{SCOPE_NOTE}}
+
+Focused Scope:
+{{FOCUSED_SCOPE}}
+
+Plan Summary:
+{{PLAN_SUMMARY}}
+
+Priorities:
+- Replace raw primitives with a small domain type, enum, or value object.
+- Keep the new type focused on the concept already present in the code.
+- Preserve existing behavior and data flow.
+
+Few-Shot Examples:
+{{FEW_SHOT_EXAMPLES}}
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Smell-Specific Guidance:
+{{SMELL_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Original Code:
+{{RAW_CODE}}

@@ -1,0 +1,9 @@
+﻿[
+  {
+    "smell": "Long Method",
+    "strategy": "extract_method",
+    "before": "def process(data):\n    total = 0\n    for i in data:\n        if i > 0:\n            total += i\n    return total",
+    "after": "def process(data):\n    return sum_positive(data)\n\n\ndef sum_positive(data):\n    total = 0\n    for i in data:\n        if i > 0:\n            total += i\n    return total",
+    "why": "The loop logic is extracted into a helper with a clear purpose, making the main function shorter and easier to read."
+  }
+]

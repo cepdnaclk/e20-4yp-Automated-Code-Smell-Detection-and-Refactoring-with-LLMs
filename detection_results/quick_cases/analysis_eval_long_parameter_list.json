@@ -1,0 +1,16 @@
+﻿{
+  "file_name": "eval_long_parameter_list.py",
+  "language": "Python",
+  "smells": [
+    {
+      "type": "Long Parameter List",
+      "severity": "Major",
+      "location": "register_user",
+      "metrics": {
+        "method_name": "register_user",
+        "parameter_count": 6,
+        "loc": 8
+      }
+    }
+  ]
+}

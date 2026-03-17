@@ -1,0 +1,36 @@
+﻿You are refactoring a Long Parameter List.
+
+Task Goal:
+{{REFACTORING_GOAL}}
+
+Focused Scope Note:
+{{SCOPE_NOTE}}
+
+Focused Scope:
+{{FOCUSED_SCOPE}}
+
+Plan Summary:
+{{PLAN_SUMMARY}}
+
+Priorities:
+- Group parameters that naturally travel together into one named object.
+- Keep call-site updates consistent and minimal.
+- Do not create multiple new wrappers unless there are distinct clusters.
+
+Few-Shot Examples:
+{{FEW_SHOT_EXAMPLES}}
+
+Strategy Guidance:
+{{STRATEGY_GUIDANCE}}
+
+Smell-Specific Guidance:
+{{SMELL_GUIDANCE}}
+
+Language Constraints:
+{{LANGUAGE_RULES}}
+
+Output Contract:
+{{OUTPUT_CONTRACT}}
+
+Original Code:
+{{RAW_CODE}}

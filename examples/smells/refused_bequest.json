@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Refused Bequest",
+    "strategy": "replace_inheritance_with_delegation",
+    "before": "class ReportPrinter(FileWriter):\n    def print_report(self, report):\n        return self.write(report)",
+    "after": "class ReportPrinter:\n    def __init__(self, writer):\n        self.writer = writer\n\n    def print_report(self, report):\n        return self.writer.write(report)",
+    "why": "Delegation replaces inheritance when only one small part of the parent behavior is needed."
+  },
+  {
+    "smell": "Refused Bequest",
+    "strategy": "replace_inheritance_with_delegation",
+    "before": "class CacheLogger(Logger):\n    def log_cache(self, msg):\n        return self.log(msg)",
+    "after": "class CacheLogger:\n    def __init__(self, logger):\n        self.logger = logger\n\n    def log_cache(self, msg):\n        return self.logger.log(msg)",
+    "why": "Composition avoids inheriting unrelated base behavior."
+  },
+  {
+    "smell": "Refused Bequest",
+    "strategy": "replace_inheritance_with_delegation",
+    "before": "class TaskMailer(Mailer):\n    def mail_task(self, task):\n        return self.send(task.owner_email)",
+    "after": "class TaskMailer:\n    def __init__(self, mailer):\n        self.mailer = mailer\n\n    def mail_task(self, task):\n        return self.mailer.send(task.owner_email)",
+    "why": "Delegation keeps the needed capability while removing a poor inheritance relationship."
+  }
+]

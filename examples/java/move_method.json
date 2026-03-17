@@ -1,0 +1,9 @@
+﻿[
+  {
+    "smell": "Feature Envy",
+    "strategy": "move_method",
+    "before": "class CustomerService {\n    public String customerSummary(Customer customer) {\n        return customer.getName() + \" - \" + customer.getTier();\n    }\n}",
+    "after": "class CustomerService {\n    public String customerSummary(Customer customer) {\n        return customer.summary();\n    }\n}\n\nclass Customer {\n    public String summary() {\n        return getName() + \" - \" + getTier();\n    }\n}",
+    "why": "The behavior moves to the class that owns the data, reducing envy and improving cohesion."
+  }
+]

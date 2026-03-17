@@ -1,0 +1,23 @@
+﻿[
+  {
+    "smell": "Message Chains",
+    "strategy": "move_method",
+    "before": "class ReportService:\n    def region_name(self, order):\n        return order.customer.account.region.name",
+    "after": "class ReportService:\n    def region_name(self, order):\n        return order.region_name()\n\n\nclass Order:\n    def region_name(self):\n        return self.customer.account.region.name",
+    "why": "The deep navigation chain is hidden behind a method on the owning object."
+  },
+  {
+    "smell": "Message Chains",
+    "strategy": "move_method",
+    "before": "class InvoiceView:\n    def customer_city(self, invoice):\n        return invoice.order.customer.address.city",
+    "after": "class InvoiceView:\n    def customer_city(self, invoice):\n        return invoice.customer_city()\n\n\nclass Invoice:\n    def customer_city(self):\n        return self.order.customer.address.city",
+    "why": "The caller no longer traverses multiple objects to get one value."
+  },
+  {
+    "smell": "Message Chains",
+    "strategy": "move_method",
+    "before": "class AuditService:\n    def owner_email(self, project):\n        return project.team.manager.profile.email",
+    "after": "class AuditService:\n    def owner_email(self, project):\n        return project.owner_email()\n\n\nclass Project:\n    def owner_email(self):\n        return self.team.manager.profile.email",
+    "why": "The chain is replaced with a single intention-revealing method."
+  }
+]

@@ -1,48 +1,110 @@
-# SmellSense AI: Automated Code Smell Detection & Analysis
+# SmellSense AI: Automated Code Smell Detection, Prioritization & Refactoring
 
-SmellSense AI is a high-performance system designed to detect, explain, and prioritize code smells in Java applications. It uses a multi-engine approach (Static, Metric, and LLM) to provide comprehensive insights and a prioritized refactoring roadmap.
+SmellSense AI is a research-based system designed to detect, explain, prioritize, and refactor code smells using a combination of static analysis, metrics, and Large Language Models (LLMs).
 
-## Key Features
+---
 
-- **Multi-Engine Detection**: Combines static analysis, code metrics, and LLM-based detection.
-- **Parallel Pipeline**: Optimized analysis using parallel processing, reducing wait times by up to 85%.
-- **Prioritized Roadmap**: Automatically calculates priority scores based on smell category and severity.
-- **Rich AI Explanations**: Provides context-aware, developer-friendly explanations and precise code locations.
-- **Persistence**: Automatically saves a prioritized list of smell names to `data/priority_list.json` for downstream refactoring tools.
+## 🔍 Detection & Analysis Module
 
-## Getting Started
+* Multi-engine detection (Static + Metrics + LLM)
+* Parallel processing pipeline (faster analysis)
+* Context-aware AI explanations
+* Generates prioritized smell list in:
+
+  ```
+  data/priority_list.json
+  ```
+
+---
+
+## 🔧 Refactoring Module (LLM-Based)
+
+* Multi-smell processing
+* Strategy selection using a smell catalog
+* Supports Python and Java validation
+* Automatic repair retry for failed outputs
+* Outputs structured results in:
+
+  ```
+  outputs/latest_results.json
+  ```
+
+---
+
+## 🚀 Key Features
+
+* Automated code smell detection and prioritization
+* Intelligent refactoring using LLMs
+* End-to-end pipeline from detection → refactoring
+* Scalable and modular architecture
+
+---
+
+## ⚙️ Getting Started
 
 ### Prerequisites
 
-- Python 3.10+
-- Java Runtime Environment (for metric engine)
-- Ollama (running locally)
+* Python 3.10+
+* Java Runtime Environment
+* Ollama (running locally)
 
-### Running the System
+---
 
-1. **Start the Backend**:
+### Run Backend
 
-   ```bash
-   python -m backend.app.main
-   ```
+```bash
+python -m backend.app.main
+```
 
-   The API will be available at `http://localhost:8000`.
+API runs at:
+http://localhost:8000
 
-2. **Start the UI**:
-   ```bash
-   python -m streamlit run frontend/ui/chatbot_ui.py
-   ```
-   The dashboard will be available at `http://localhost:8501`.
+---
 
-## Output
+### Run Frontend
 
-The system generates a `data/priority_list.json` file after each analysis, containing a clean, prioritized list of smell names ready for automated refactoring:
+```bash
+streamlit run frontend/ui/chatbot_ui.py
+```
 
-````json
+UI runs at:
+http://localhost:8501
+
+---
+
+## 📂 Outputs
+
+### Detection Output
+
+File:
+
+```
+data/priority_list.json
+```
+
+Example:
+
+```json
 [
-    "Empty Catch Block",
-    "Poor Method Name",
-    "Dead Code",
-    "Magic Number"
-]```
-````
+  "Empty Catch Block",
+  "Poor Method Name",
+  "Dead Code",
+  "Magic Number"
+]
+```
+
+---
+
+### Refactoring Output
+
+File:
+
+```
+outputs/latest_results.json
+```
+
+---
+
+## 👨‍💻 Project Goal
+
+To build an intelligent system that not only detects code smells but also automatically suggests and applies refactoring using LLMs, improving code quality and maintainability.

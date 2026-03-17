@@ -1,0 +1,72 @@
+﻿{
+  "file_name": "example1.java",
+  "language": "Java",
+  "smells": [
+    {
+      "type": "Blob (God Class)",
+      "severity": "Critical",
+      "location": "example1 line 11",
+      "metrics": {
+        "class_name": "example1",
+        "field_count": 16,
+        "method_count": 19,
+        "responsibility_count": 6,
+        "loc": 283
+      }
+    },
+    {
+      "type": "Excessive Class Length",
+      "severity": "Major",
+      "location": "example1 line 11",
+      "metrics": {
+        "class_name": "example1",
+        "field_count": 16,
+        "method_count": 19,
+        "loc": 283
+      }
+    },
+    {
+      "type": "Long Method",
+      "severity": "Major",
+      "location": "processEmployeeData line 37",
+      "metrics": {
+        "method_name": "processEmployeeData",
+        "loc": 34,
+        "cyclomatic_complexity": 8,
+        "responsibilities": 5
+      }
+    },
+    {
+      "type": "Long Parameter List",
+      "severity": "Major",
+      "location": "addEmployee line 19",
+      "metrics": {
+        "method_name": "addEmployee",
+        "parameter_count": 10,
+        "loc": 14
+      }
+    },
+    {
+      "type": "Lazy Class",
+      "severity": "Moderate",
+      "location": "EmployeeId line 231",
+      "metrics": {
+        "class_name": "EmployeeId",
+        "field_count": 1,
+        "method_count": 2,
+        "loc": 5
+      }
+    },
+    {
+      "type": "Data Class",
+      "severity": "Major",
+      "location": "Employee line 295",
+      "metrics": {
+        "class_name": "Employee",
+        "public_field_count": 18,
+        "accessor_count": 4,
+        "loc": 35
+      }
+    }
+  ]
+}
