@@ -38,3 +38,6 @@ SMELL: Tight Coupling to Console Output | LOCATION: printStudent() and printTeac
 2026-03-17 00:49:13,068 [INFO] Analyzing smell: Tight Coupling to Console Output...
 2026-03-17 00:49:58,470 [INFO] Analysis complete
 2026-03-17 00:49:58,471 [INFO] Priority smell names saved to data/priority_list.json
+2026-03-17 10:34:07,507 [INFO] Starting uvicorn server on port 8000
+2026-03-17 10:34:52,096 [INFO] Starting uvicorn server on port 8000
+2026-03-17 10:35:37,629 [INFO] Starting uvicorn server on port 8000

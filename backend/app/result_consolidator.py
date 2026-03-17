@@ -54,6 +54,9 @@ def consolidate_results(engine_results):
     # Handle Static and Metric first
     for engine in ["static_engine", "metric_engine"]:
         for smell in normalized_results[engine]:
+            if get_category_for_smell(smell) == "Unknown":
+                continue
+
             if smell not in candidate_map:
                 candidate_map[smell] = {
                     "smell": smell,
@@ -75,6 +78,9 @@ def consolidate_results(engine_results):
         location = entity["location"]
         description = entity["description"]
         
+        if get_category_for_smell(name) == "Unknown":
+            continue
+
         # Simple fuzzy matching for duplicates (if LLM name slightly differs from Static/Metric)
         # For now, let's keep it exact or add to existing if it matches
         matched = False
