@@ -15,6 +15,8 @@ ALIASES = {
     "Blob": "Blob (God Class)",
     "God Class": "Blob (God Class)",
     "Long Function": "Long Method",
+    "Large Class": "Excessive Class Length",
+    "Long Statement": "Long Method",
 }
 
 

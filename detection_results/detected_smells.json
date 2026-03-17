@@ -1,0 +1,45 @@
+{
+  "file_name": "manual_input.java",
+  "language": "Java",
+  "code": "public class EmployeeManager {\n    public void addEmployee(String id, String name, int age, String department, double salary, String address) {\n        System.out.println(\"Adding employee...\");\n        System.out.println(\"ID: \" + id);\n        System.out.println(\"Name: \" + name);\n        System.out.println(\"Age: \" + age);\n        System.out.println(\"Department: \" + department);\n        System.out.println(\"Salary: \" + salary);\n        System.out.println(\"Address: \" + address);\n    }\n\n    public void processEmployeeData() {\n        int salary = 5000;\n        int bonus = 0;\n\n        if (salary > 4000) {\n            bonus = 1000;\n        } else {\n            bonus = 500;\n        }\n\n        int total = salary + bonus;\n        System.out.println(\"Total salary: \" + total);\n\n        if (total > 5500) {\n            System.out.println(\"High paid employee\");\n        } else {\n            System.out.println(\"Regular employee\");\n        }\n\n        System.out.println(\"Processing complete\");\n    }\n}\n\nclass Employee {\n    private String id;\n    private String name;\n    private int age;\n    private String department;\n    private double salary;\n\n    public Employee(String id, String name, int age, String department, double salary) {\n        this.id = id;\n        this.name = name;\n        this.age = age;\n        this.department = department;\n        this.salary = salary;\n    }\n\n    public String getId() {\n        return id;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public int getAge() {\n        return age;\n    }\n\n    public String getDepartment() {\n        return department;\n    }\n\n    public double getSalary() {\n        return salary;\n    }\n}\n",
+  "detected_smells": [
+    {
+      "smell": "Magic Number",
+      "supported_by": [
+        "static_engine"
+      ],
+      "evidence": [
+        "Static analysis detected Magic Number patterns."
+      ],
+      "location": "General"
+    }
+  ],
+  "engine_summary": {
+    "static_engine": [
+      "Magic Number"
+    ],
+    "metric_engine": [],
+    "llm_engine": []
+  },
+  "primary_smell": "Magic Number",
+  "category": "Implementation",
+  "priority_list": [
+    {
+      "smell": "Magic Number",
+      "category": "Implementation",
+      "supported_by": [
+        "static_engine"
+      ],
+      "explanation": "Could not generate explanation.",
+      "location": "General",
+      "severity": "Major",
+      "severity_score": 0.6,
+      "smell_weight": 0.8,
+      "priority_score": 0.48,
+      "ui_severity": "2.4/5",
+      "evidence": [
+        "Static analysis detected Magic Number patterns."
+      ]
+    }
+  ]
+}

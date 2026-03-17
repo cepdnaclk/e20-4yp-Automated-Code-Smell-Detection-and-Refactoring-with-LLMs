@@ -4,6 +4,7 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent
 INPUT_ANALYSIS_PATH = Path(os.getenv("ANALYSIS_FILE", str(BASE_DIR / "detection_results" / "analysis.json")))
+DETECTION_HANDOFF_PATH = BASE_DIR / "detection_results" / "from_detection.json"
 UPLOADS_DIR = BASE_DIR / "uploads"
 OUTPUTS_DIR = BASE_DIR / "outputs"
 EXPERIMENTS_DIR = OUTPUTS_DIR / "experiments"

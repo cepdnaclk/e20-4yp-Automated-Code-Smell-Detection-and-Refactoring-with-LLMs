@@ -1,34 +1,34 @@
 {
-  "file_name": "single_long_method.py",
-  "language": "Python",
+  "file_name": "manual_input.java",
+  "language": "Java",
   "results": [
     {
-      "smell_type": "Long Method",
-      "strategy": "extract_method",
+      "smell_type": "Magic Number",
+      "strategy": "replace_magic_number_with_constant",
       "status": "success",
-      "rationale": "Applied extract_method for Long Method within size_complexity.",
-      "original_code": "def process_order(order):\n    subtotal = 0\n    for item in order[\"items\"]:\n        subtotal += item[\"price\"] * item[\"quantity\"]\n\n    discount = 0\n    if order[\"customer_type\"] == \"vip\":\n        discount = subtotal * 0.10\n    elif order[\"customer_type\"] == \"member\":\n        discount = subtotal * 0.05\n\n    shipping = 0\n    if subtotal > 100:\n        shipping = 0\n    else:\n        shipping = 12\n\n    tax = (subtotal - discount) * 0.08\n    total = subtotal - discount + shipping + tax\n\n    summary = {\n        \"customer\": order[\"customer_name\"],\n        \"subtotal\": subtotal,\n        \"discount\": discount,\n        \"shipping\": shipping,\n        \"tax\": tax,\n        \"total\": total,\n    }\n    return summary\n",
-      "refactored_code": "def process_order(order):\n    subtotal = calculate_subtotal(order)\n    discount = calculate_discount(subtotal, order[\"customer_type\"])\n    shipping = calculate_shipping(subtotal)\n    tax = calculate_tax(subtotal, discount)\n    total = calculate_total(subtotal, discount, shipping, tax)\n    \n    summary = {\n        \"customer\": order[\"customer_name\"],\n        \"subtotal\": subtotal,\n        \"discount\": discount,\n        \"shipping\": shipping,\n        \"tax\": tax,\n        \"total\": total,\n    }\n    return summary\n\ndef calculate_subtotal(order):\n    subtotal = 0\n    for item in order[\"items\"]:\n        subtotal += item[\"price\"] * item[\"quantity\"]\n    return subtotal\n\ndef calculate_discount(subtotal, customer_type):\n    if customer_type == \"vip\":\n        discount = subtotal * 0.10\n    elif customer_type == \"member\":\n        discount = subtotal * 0.05\n    else:\n        discount = 0\n    return discount\n\ndef calculate_shipping(subtotal):\n    if subtotal > 100:\n        shipping = 0\n    else:\n        shipping = 12\n    return shipping\n\ndef calculate_tax(subtotal, discount):\n    tax = (subtotal - discount) * 0.08\n    return tax\n\ndef calculate_total(subtotal, discount, shipping, tax):\n    total = subtotal - discount + shipping + tax\n    return total",
+      "rationale": "Applied replace_magic_number_with_constant for Magic Number within literals_constants.",
+      "original_code": "public class EmployeeManager {\n    public void addEmployee(String id, String name, int age, String department, double salary, String address) {\n        System.out.println(\"Adding employee...\");\n        System.out.println(\"ID: \" + id);\n        System.out.println(\"Name: \" + name);\n        System.out.println(\"Age: \" + age);\n        System.out.println(\"Department: \" + department);\n        System.out.println(\"Salary: \" + salary);\n        System.out.println(\"Address: \" + address);\n    }\n\n    public void processEmployeeData() {\n        int salary = 5000;\n        int bonus = 0;\n\n        if (salary > 4000) {\n            bonus = 1000;\n        } else {\n            bonus = 500;\n        }\n\n        int total = salary + bonus;\n        System.out.println(\"Total salary: \" + total);\n\n        if (total > 5500) {\n            System.out.println(\"High paid employee\");\n        } else {\n            System.out.println(\"Regular employee\");\n        }\n\n        System.out.println(\"Processing complete\");\n    }\n}\n\nclass Employee {\n    private String id;\n    private String name;\n    private int age;\n    private String department;\n    private double salary;\n\n    public Employee(String id, String name, int age, String department, double salary) {\n        this.id = id;\n        this.name = name;\n        this.age = age;\n        this.department = department;\n        this.salary = salary;\n    }\n\n    public String getId() {\n        return id;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public int getAge() {\n        return age;\n    }\n\n    public String getDepartment() {\n        return department;\n    }\n\n    public double getSalary() {\n        return salary;\n    }\n}\n",
+      "refactored_code": "The code provided is already refactored to address the smell of Magic Number. The numbers in the original code have been replaced with named constants, so there are no magic numbers left. This makes it easier to understand and maintain the code, as well as preventing potential bugs if a future developer changes the logic around these numbers without realizing it might cause unintended side effects.\n\nHere's your refactored code:\n\n```java\npublic class EmployeeManager {\n    public static final int BASE_SALARY = 5000;\n    public static final int MAX_BONUS = 1000;\n    public static final int MIN_BONUS = 500;\n    public static final int HIGH_PAID_EMPLOYEE_THRESHOLD = 5500;\n\n    public void addEmployee(String id, String name, int age, String department, double salary, String address) {\n        System.out.println(\"Adding employee...\");\n        System.out.println(\"ID: \" + id);\n        System.out.println(\"Name: \" + name);\n        System.out.println(\"Age: \" + age);\n        System.out.println(\"Department: \" + department);\n        System.out.println(\"Salary: \" + salary);\n        System.out.println(\"Address: \" + address);\n    }\n\n    public void processEmployeeData() {\n        int salary = BASE_SALARY;\n        int bonus = 0;\n\n        if (salary > BASE_SALARY) {\n            bonus = MAX_BONUS;\n        } else {\n            bonus = MIN_BONUS;\n        }\n\n        int total = salary + bonus;\n        System.out.println(\"Total salary: \" + total);\n\n        if (total > HIGH_PAID_EMPLOYEE_THRESHOLD) {\n            System.out.println(\"High paid employee\");\n        } else {\n            System.out.println(\"Regular employee\");\n        }\n\n        System.out.println(\"Processing complete\");\n    }\n}\n\nclass Employee {\n    private String id;\n    private String name;\n    private int age;\n    private String department;\n    private double salary;\n\n    public Employee(String id, String name, int age, String department, double salary) {\n        this.id = id;\n        this.name = name;\n        this.age = age;\n        this.department = department;\n        this.salary = salary;\n    }\n\n    public String getId() {\n        return id;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public int getAge() {\n        return age;\n    }\n\n    public String getDepartment() {\n        return department;\n    }\n\n    public double getSalary() {\n        return salary;\n    }\n}\n```",
       "validation": {
         "syntax": true,
-        "compile": null,
+        "compile": true,
         "structural": null,
         "semantic_check": "not_run",
         "errors": []
       },
       "metrics": {
-        "loc_before": 25,
-        "loc_after": 40,
-        "complexity_before": 5,
-        "complexity_after": 5,
-        "parameter_count_before": 1,
-        "parameter_count_after": 1
+        "loc_before": 57,
+        "loc_after": 65,
+        "complexity_before": 3,
+        "complexity_after": 4,
+        "parameter_count_before": 6,
+        "parameter_count_after": 6
       },
-      "category": "design",
-      "group": "size_complexity",
-      "location": "process_order",
+      "category": "implementation",
+      "group": "literals_constants",
+      "location": "General",
       "severity": "Major",
-      "focused_scope": "def process_order(order):\n    subtotal = 0\n    for item in order[\"items\"]:\n        subtotal += item[\"price\"] * item[\"quantity\"]\n\n    discount = 0\n    if order[\"customer_type\"] == \"vip\":\n        discount = subtotal * 0.10\n    elif order[\"customer_type\"] == \"member\":\n        discount = subtotal * 0.05\n\n    shipping = 0\n    if subtotal > 100:\n        shipping = 0\n    else:\n        shipping = 12\n\n    tax = (subtotal - discount) * 0.08\n    total = subtotal - discount + shipping + tax\n\n    summary = {\n        \"customer\": order[\"customer_name\"],\n        \"subtotal\": subtotal,\n        \"discount\": discount,\n        \"shipping\": shipping,\n        \"tax\": tax,\n        \"total\": total,\n    }\n    return summary",
+      "focused_scope": "public class EmployeeManager {\n    public void addEmployee(String id, String name, int age, String department, double salary, String address) {\n        System.out.println(\"Adding employee...\");\n        System.out.println(\"ID: \" + id);\n        System.out.println(\"Name: \" + name);\n        System.out.println(\"Age: \" + age);\n        System.out.println(\"Department: \" + department);\n        System.out.println(\"Salary: \" + salary);\n        System.out.println(\"Address: \" + address);\n    }\n\n    public void processEmployeeData() {",
       "refactoring_plan": "Direct refactoring mode enabled; apply the strategy conservatively within the focused scope."
     }
   ],

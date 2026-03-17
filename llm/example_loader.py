@@ -14,6 +14,7 @@ STRATEGY_ALIAS = {
     "inline_method_or_class": "extract_method",
     "encapsulate_field": "extract_class",
     "remove_dead_code": "extract_method",
+    "replace_magic_number_with_constant": "replace_magic_number_with_constant",
     "reduce_coupling": "move_method",
     "replace_inheritance_with_delegation": "extract_class",
     "split_responsibilities": "extract_class",
@@ -22,6 +23,11 @@ STRATEGY_ALIAS = {
 }
 
 GENERIC_BY_STRATEGY = {
+    "replace_magic_number_with_constant": [
+        ("def total():\n    return 7 * 24", "HOURS_PER_DAY = 24\nDAYS_PER_WEEK = 7\n\n\ndef total():\n    return DAYS_PER_WEEK * HOURS_PER_DAY", "Replaces unexplained literals with named constants."),
+        ("class Timer:\n    def timeout(self):\n        return 30", "DEFAULT_TIMEOUT_SECONDS = 30\n\n\nclass Timer:\n    def timeout(self):\n        return DEFAULT_TIMEOUT_SECONDS", "Introduces a domain constant for a repeated threshold."),
+        ("def shipping():\n    if weight > 50:\n        return 15\n    return 5", "HEAVY_WEIGHT_LIMIT = 50\nHEAVY_SHIPPING_FEE = 15\nSTANDARD_SHIPPING_FEE = 5\n\n\ndef shipping():\n    if weight > HEAVY_WEIGHT_LIMIT:\n        return HEAVY_SHIPPING_FEE\n    return STANDARD_SHIPPING_FEE", "Names the decision threshold and related fee values."),
+    ],
     "extract_method": [
         ("def f(items):\n    total = 0\n    for i in items:\n        if i > 0:\n            total += i\n    return total", "def f(items):\n    return positive_total(items)\n\n\ndef positive_total(items):\n    total = 0\n    for i in items:\n        if i > 0:\n            total += i\n    return total", "Extracts cohesive loop logic into a helper."),
         ("def g(users):\n    names = []\n    for user in users:\n        if user.active:\n            names.append(user.name)\n    return names", "def g(users):\n    return active_names(users)\n\n\ndef active_names(users):\n    names = []\n    for user in users:\n        if user.active:\n            names.append(user.name)\n    return names", "Separates collection logic from orchestration."),

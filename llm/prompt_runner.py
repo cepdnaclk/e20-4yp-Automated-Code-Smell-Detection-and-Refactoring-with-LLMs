@@ -40,6 +40,11 @@ STRATEGY_GUIDANCE = {
         "Replace loosely related primitive values with a domain object or enum.",
         "Improve clarity without expanding scope beyond the smell.",
     ],
+    "replace_magic_number_with_constant": [
+        "Replace unexplained literal values with named constants close to their usage.",
+        "Choose names that explain the business meaning of each extracted constant.",
+        "Do not change runtime behavior while introducing constants.",
+    ],
     "replace_conditional_with_polymorphism": [
         "Replace type-based branching with polymorphic behavior when appropriate.",
         "Keep the resulting design small and understandable.",
@@ -106,6 +111,10 @@ SMELL_GUIDANCE = {
     "dead_code": [
         "Remove only code proven unused or unreachable in the provided context.",
         "Do not invent new behavior while cleaning up dead paths.",
+    ],
+    "magic_number": [
+        "Replace hard-coded numeric literals with named constants when the meaning is not obvious.",
+        "Leave common trivial literals such as 0 and 1 alone unless the context clearly requires naming them.",
     ],
     "excessive_coupling": [
         "Hide deep navigation behind one intention-revealing method or boundary.",

@@ -1,4 +1,12 @@
-﻿SMELL_CATALOG = {
+SMELL_CATALOG = {
+    "Magic Number": {
+        "category": "implementation",
+        "group": "literals_constants",
+        "primary_strategy": "replace_magic_number_with_constant",
+        "fallback_strategies": ["replace_primitive_with_value_object"],
+        "validation_level": "syntax",
+        "priority": 1,
+    },
     "Blob (God Class)": {
         "category": "design",
         "group": "size_responsibility",
