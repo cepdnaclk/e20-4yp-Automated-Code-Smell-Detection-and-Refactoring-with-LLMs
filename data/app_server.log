@@ -117,3 +117,5 @@ SMELL: Magic Number | LOCATION: Line 6 and Line 16 | DESCRIPTION: The value 50 i
 2026-03-17 11:13:57,000 [INFO] Analyzing smell: Duplicate Code...
 2026-03-17 11:14:07,476 [INFO] Analysis complete
 2026-03-17 11:14:07,477 [INFO] Priority smell names saved to data/priority_list.json
+2026-03-17 11:56:31,522 [INFO] Starting uvicorn server on port 8000
+2026-03-17 13:30:02,521 [INFO] Starting uvicorn server on port 8000
