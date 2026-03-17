@@ -1,41 +1,3 @@
-'''import streamlit as st
-import requests
-
-API_URL = "http://localhost:8000/analyze"
-
-st.set_page_config(page_title="SmellSense AI")
-
-st.title("SmellSense AI")
-st.subheader("Automated Code Smell Detection Chatbot")
-
-uploaded_file = st.file_uploader("Upload Java File", type=["java"])
-
-if uploaded_file:
-
-    st.write("Analyzing code...")
-
-    response = requests.post(
-        API_URL,
-        files={"file": uploaded_file}
-    )
-
-    if response.status_code == 200:
-
-        data = response.json()
-
-        st.write("### Static Detection")
-        st.write(data["static_engine"])
-
-        st.write("### Metric Detection")
-        st.write(data["metric_engine"])
-
-        st.write("### LLM Semantic Detection")
-        st.write(data["llm_engine"])
-
-    else:
-
-        st.write("Error analyzing file.")'''
-
 import streamlit as st
 import requests
 
@@ -76,8 +38,8 @@ if uploaded_file:
                 priority_val = item["priority_score"]
                 color = "red" if priority_val > 0.8 else "orange" if priority_val > 0.5 else "blue"
                 
-                # Header showing Number and Smell Name
-                header = f"{idx}. {item['smell']} (Location: {item['location']})"
+                # Header showing Number and Smell Name (Location removed from title)
+                header = f"{idx}. {item['smell']}"
                 
                 with st.expander(f"**{header}** - Priority Score: :{color}[{item['ui_severity']}]"):
                     st.write(f"**📝 Explanation:** {item['explanation']}")
