@@ -1,6 +1,32 @@
 from backend.app.constants import get_category_for_smell
 import re
 
+def normalize_smell_name(name):
+    """
+    Maps common LLM-hallucinated or synonymous names to the official taxonomy.
+    """
+    mapping = {
+        "god object": "God Component",
+        "god class": "Large Class",
+        "blob class": "Large Class",
+        "spaghetti code": "Complex Method",
+        "copy-paste code": "Duplicate Code",
+        "magic numbers": "Magic Number",
+        "single responsibility principle violation": "Large Class", # Often Large Class is the manifestation
+        "srp violation": "Large Class"
+    }
+    
+    normalized = name.lower().strip()
+    if normalized in mapping:
+        return mapping[normalized]
+    
+    # Check for partial matches in mapping
+    for key, value in mapping.items():
+        if key in normalized:
+            return value
+            
+    return name
+
 def consolidate_results(engine_results):
     """
     Consolidates results from static_engine, metric_engine, and llm_engine.
@@ -34,7 +60,8 @@ def consolidate_results(engine_results):
         matches = re.finditer(pattern, llm_output, re.DOTALL | re.IGNORECASE)
         
         for match in matches:
-            name = match.group(1).strip().strip("[]")
+            raw_name = match.group(1).strip().strip("[]")
+            name = normalize_smell_name(raw_name)
             location = match.group(2).strip().strip("[]")
             description = match.group(3).strip().strip("[]")
             
@@ -85,11 +112,12 @@ def consolidate_results(engine_results):
         # For now, let's keep it exact or add to existing if it matches
         matched = False
         for existing_smell in candidate_map:
-            if name.lower() in existing_smell.lower() or existing_smell.lower() in name.lower():
-                candidate_map[existing_smell]["supported_by"].append("llm_engine")
-                candidate_map[existing_smell]["evidence"].append(f"LLM confirmed: {description}")
-                if location and candidate_map[existing_smell]["location"] == "General":
-                    candidate_map[existing_smell]["location"] = location
+            if name.lower() == existing_smell.lower():
+                if "llm_engine" not in candidate_map[existing_smell]["supported_by"]:
+                    candidate_map[existing_smell]["supported_by"].append("llm_engine")
+                    candidate_map[existing_smell]["evidence"].append(f"LLM confirmed: {description}")
+                    if location and candidate_map[existing_smell]["location"] == "General":
+                        candidate_map[existing_smell]["location"] = location
                 matched = True
                 break
         

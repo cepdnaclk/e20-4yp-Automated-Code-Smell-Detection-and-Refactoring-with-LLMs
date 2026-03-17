@@ -1,4 +1,4 @@
-﻿import json
+import json
 import logging
 import os
 import shutil
@@ -27,8 +27,24 @@ except Exception as e:
     logger.error(f"Import error: {e}")
     sys.exit(1)
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
 
+# ✅ Keep CORS (friend's part)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://localhost:5175"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ---------------- Helper Functions ---------------- #
 
 def _infer_language(file_name: str) -> str:
     return "Java" if file_name.lower().endswith(".java") else "Python"
@@ -75,6 +91,7 @@ def _save_refactoring_handoff(file_name: str, code: str, final_result: dict) -> 
         json.dump(handoff_payload, handle, indent=2)
     logger.info("Refactoring handoff written to detection_results/from_detection.json")
 
+# ---------------- API Endpoints ---------------- #
 
 @app.get("/")
 def home():
@@ -104,6 +121,7 @@ async def analyze(file: UploadFile = File(...)):
         logger.info("Analysis complete")
 
         smell_names = [item["smell"] for item in final_result.get("priority_list", [])]
+        os.makedirs("data", exist_ok=True)
         with open("data/priority_list.json", "w", encoding="utf-8") as f:
             json.dump(smell_names, f, indent=4)
         logger.info("Priority smell names saved to data/priority_list.json")
@@ -111,11 +129,13 @@ async def analyze(file: UploadFile = File(...)):
         detected_payload = _save_detected_smells(file.filename, code, consolidation, final_result)
         _save_refactoring_handoff(file.filename, code, final_result)
         refactoring_result = _run_refactoring(detected_payload)
+
         return {
             **final_result,
             "detected_smells": detected_payload.get("detected_smells", []),
             "refactoring": refactoring_result,
         }
+
     except Exception as e:
         logger.exception("Error during analysis")
         return {"error": str(e)}
