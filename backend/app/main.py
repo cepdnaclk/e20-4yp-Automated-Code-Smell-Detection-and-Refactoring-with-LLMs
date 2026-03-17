@@ -113,6 +113,7 @@ async def analyze(file: UploadFile = File(...)):
         refactoring_result = _run_refactoring(detected_payload)
         return {
             **final_result,
+            "detected_smells": detected_payload.get("detected_smells", []),
             "refactoring": refactoring_result,
         }
     except Exception as e:

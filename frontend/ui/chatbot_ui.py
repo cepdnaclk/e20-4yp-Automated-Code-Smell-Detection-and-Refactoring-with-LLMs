@@ -34,7 +34,6 @@ def inject_custom_css():
             border-radius: 10px !important;
             margin-right: 5px !important;
             padding: 10px 25px !important;
-            transition: all 0.2s ease !important;
         }
 
         button[data-baseweb="tab"][aria-selected="true"] {
@@ -71,19 +70,6 @@ def inject_custom_css():
             font-weight: 700 !important;
             font-size: 1rem !important;
             padding: 12px 15px !important;
-            list-style: none !important;
-            transition: background-color 0.2s ease !important;
-        }
-
-        [data-testid="stExpander"] summary:hover,
-        [data-testid="stExpander"] summary:focus,
-        [data-testid="stExpander"] summary:active,
-        [data-testid="stExpander"][aria-expanded="true"] summary,
-        details[open] > summary {
-            background-color: #f3ebff !important;
-            color: #5a3f7a !important;
-            outline: none !important;
-            box-shadow: none !important;
         }
 
         .streamlit-expanderContent {
@@ -100,29 +86,10 @@ def inject_custom_css():
             border: none !important;
             font-weight: 600 !important;
             padding: 0.6rem 1.2rem !important;
-            transition: all 0.2s ease !important;
         }
 
         div.stButton > button:hover {
             background-color: #a87fe8 !important;
-            box-shadow: 0 4px 12px rgba(167, 127, 232, 0.25) !important;
-        }
-
-        div[data-testid="stFileUploader"] section button {
-            background-color: #ffffff !important;
-            color: #5b4b73 !important;
-            border-radius: 8px !important;
-            border: none !important;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-        }
-
-        div[data-testid="stFileUploader"] section button:hover {
-            background-color: #f8f4ff !important;
-        }
-
-        [data-testid="stExpander"]:hover {
-            border-color: #cfb4f4 !important;
-            box-shadow: 0 4px 10px rgba(140, 110, 190, 0.12) !important;
         }
 
         [data-testid="stAlert"], [data-testid="stNotification"] {
@@ -130,16 +97,6 @@ def inject_custom_css():
             background-color: #f3ebff !important;
             color: #5a3f7a !important;
             border: 1px solid #e3d3f8 !important;
-        }
-
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] p,
-        [data-testid="stNotification"] [data-testid="stMarkdownContainer"] p {
-            color: #5a3f7a !important;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid #e8dcfa;
         }
     </style>
     """,
@@ -151,13 +108,28 @@ def detect_language(file_name: str) -> str:
     return "java" if str(file_name).lower().endswith(".java") else "python"
 
 
+def render_engine_smells(engine_name: str, smells):
+    title_map = {
+        "static_engine": "Static Engine",
+        "metric_engine": "Metric Engine",
+        "llm_engine": "LLM Engine",
+    }
+    label = title_map.get(engine_name, engine_name.replace("_", " ").title())
+    with st.expander(label):
+        if smells:
+            for smell in smells:
+                st.markdown(f"- `{smell}`")
+        else:
+            st.caption("No smells reported by this engine.")
+
+
 inject_custom_css()
 
 st.title("SmellSense AI")
 st.subheader("Automated Code Smell Detection, Analysis, and Refactoring")
 st.write("---")
 
-col1, col2, col3 = st.columns([1, 1, 1], gap="large")
+col1, col2, col3, col4 = st.columns([1.1, 1, 1, 1.2], gap="large")
 
 with col1:
     st.markdown("### Upload or Paste Code")
@@ -176,7 +148,7 @@ with col1:
     with tab2:
         pasted_code = st.text_area(
             "Paste your Java code here:",
-            height=300,
+            height=320,
             placeholder="public class Example { ... }",
             key="paster",
         )
@@ -188,13 +160,12 @@ with col1:
     if source_code and st.button("Analyze code", use_container_width=True):
         st.info("Analyzing code... Please wait.")
         files = {"file": (file_name, io.BytesIO(source_code.encode("utf-8")), "text/plain")}
-
         try:
             response = requests.post(API_URL, files=files, timeout=600)
             if response.status_code == 200:
                 analysis_data = response.json()
-                st.success("Analysis complete.")
                 st.session_state["analysis_results"] = analysis_data
+                st.success("Analysis complete.")
             else:
                 st.error(f"Error: {response.status_code}")
         except Exception as exc:
@@ -204,6 +175,33 @@ if "analysis_results" in st.session_state:
     analysis_data = st.session_state["analysis_results"]
 
 with col2:
+    st.markdown("### Detected Smells")
+    if analysis_data:
+        detected_smells = analysis_data.get("detected_smells", [])
+        if detected_smells:
+            st.caption("Consolidated detected smells")
+            for idx, item in enumerate(detected_smells, 1):
+                header = f"{idx}. {item.get('smell', 'Unknown')}"
+                with st.expander(header):
+                    st.markdown(f"**Location:** `{item.get('location', 'General')}`")
+                    st.caption(f"Supported by: {', '.join(item.get('supported_by', []))}")
+                    evidence = item.get("evidence", [])
+                    if evidence:
+                        for line in evidence:
+                            st.markdown(f"- {line}")
+        else:
+            st.info("No consolidated smells available.")
+
+        st.write("---")
+        st.caption("Smells detected by each engine")
+        engine_summary = analysis_data.get("engine_summary", {})
+        render_engine_smells("static_engine", engine_summary.get("static_engine", []))
+        render_engine_smells("metric_engine", engine_summary.get("metric_engine", []))
+        render_engine_smells("llm_engine", engine_summary.get("llm_engine", []))
+    else:
+        st.write("Detected smells will appear here after analysis.")
+
+with col3:
     st.markdown("### Priority List")
     if analysis_data and "priority_list" in analysis_data:
         for idx, item in enumerate(analysis_data["priority_list"], 1):
@@ -221,17 +219,15 @@ with col2:
             with st.expander(header):
                 st.markdown(f"**Explanation:** {item.get('explanation', 'N/A')}")
                 st.markdown(f"**Location:** `{item.get('location', 'unknown')}`")
-                st.write("---")
                 st.caption(
                     f"Category: {item.get('category', 'General')} | Engines: {', '.join(item.get('supported_by', []))}"
                 )
     elif analysis_data:
-        st.info("Raw output detected. Please check the API format.")
-        st.write(analysis_data)
+        st.info("No prioritized smells available.")
     else:
-        st.write("Results will appear here after analysis.")
+        st.write("Priority list will appear here after analysis.")
 
-with col3:
+with col4:
     st.markdown("### Refactored Code")
     if analysis_data and analysis_data.get("refactoring"):
         refactoring = analysis_data["refactoring"]
