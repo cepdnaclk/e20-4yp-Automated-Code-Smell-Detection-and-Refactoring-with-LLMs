@@ -1,4 +1,5 @@
 [
-    "Broken Hierarchy",
-    "Imperative Abstraction"
+    "Unnecessary Abstraction",
+    "Duplicate Code",
+    "Magic Number"
 ]
