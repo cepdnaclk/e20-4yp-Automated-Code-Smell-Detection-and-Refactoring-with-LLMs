@@ -14,7 +14,7 @@ title: Automated Code Smell Detection and Refactoring with LLMs
 
 - E/20/062, Dhananji K.S., [email](mailto:e20062@eng.pdn.ac.lk)
 - E/20/357, Senavirathna D.B.C.M., [email](mailto:e20367@eng.pdn.ac.lk)
-- E/20/350, J.P.D.N. Sandamali, [email](mailto:e20350@eng.pdn.ac.lk)
+- E/20/350, Sandamali J.P.D.N., [email](mailto:e20350@eng.pdn.ac.lk)
 
 #### Table of Contents
 

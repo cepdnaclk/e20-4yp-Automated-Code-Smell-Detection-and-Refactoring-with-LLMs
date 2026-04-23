@@ -1,0 +1,33 @@
+{    
+    "title": "Smart Locker System",
+    "team": [
+        {
+            "name": "Dhananji K.S.",
+            "email": "e20062@eng.pdn.ac.lk",
+            "eNumber": "E/20/062"
+        },
+        {
+            "name": "Sandamali J.P.D.N.",
+            "email": "e20350@eng.pdn.ac.lk",
+            "eNumber": "E/20/350"
+        },
+        {
+            "name": "Senavirathna D.B.C.M.",
+            "email": "e20367@eng.pdn.ac.lk",
+            "eNumber": "E/20/367"
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Mr. Thilina Gunarathne",
+            "email": "thilinag@eng.pdn.ac.lk"
+        },
+        {
+            "name": "Mr. Biswajith Dissanayake",
+            "email": "biswajithd@eng.pdn.ac.lk"
+        }
+
+    ],
+    "description": "SmellSense AI is a research-based intelligent software engineering system designed to automatically detect, analyze, prioritize, and refactor code smells using a combination of static analysis techniques, software metrics, and Large Language Models (LLMs).",
+    "tags": ["LLM", "Refactoring", "Code Smells", "Software Metrics", "Static Analysis"]
+}
