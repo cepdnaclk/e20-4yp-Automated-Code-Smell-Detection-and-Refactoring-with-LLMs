@@ -76,7 +76,18 @@ def inject_custom_css():
             background-color: #fbf8ff !important;
             border-top: 1px solid #e7d9fa !important;
             padding: 15px !important;
-            color: #4d3f63 !important;
+            color: #000000 !important;
+        }
+
+        .streamlit-expanderContent p,
+        .streamlit-expanderContent li,
+        .streamlit-expanderContent span,
+        .streamlit-expanderContent div,
+        .streamlit-expanderContent code,
+        [data-testid="stCaptionContainer"] p,
+        [data-testid="stMarkdownContainer"] p,
+        [data-testid="stMarkdownContainer"] li {
+            color: #1f1f1f !important;
         }
 
         div.stButton > button {

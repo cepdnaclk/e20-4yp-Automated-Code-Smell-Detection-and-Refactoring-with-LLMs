@@ -1,4 +1,3 @@
-﻿import re
 import subprocess
 from typing import Optional
 
@@ -9,22 +8,30 @@ from config import LLM_PROVIDER, OLLAMA_MODEL, OLLAMA_PATH, OPENAI_API_KEY, OPEN
 
 def _call_ollama(prompt: str, model_override: Optional[str] = None) -> str:
     model_name = model_override or OLLAMA_MODEL
+
+    print("OLLAMA_PATH =", OLLAMA_PATH)
+    print("MODEL =", model_name)
+
     process = subprocess.Popen(
-        [OLLAMA_PATH, "run", model_name],
+        [str(OLLAMA_PATH), "run", str(model_name)],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         encoding="utf-8",
         errors="ignore",
+        shell=False,
     )
     output, error = process.communicate(prompt)
+
     if process.returncode != 0:
         raise RuntimeError(error.strip() or "Ollama call failed")
+
     return output.strip()
 
 
 def _call_openai(prompt: str, model_override: Optional[str] = None) -> str:
     model_name = model_override or OPENAI_MODEL
+
     if not OPENAI_API_KEY:
         raise RuntimeError("OPENAI_API_KEY is not set")
     if not model_name:
@@ -42,7 +49,3 @@ def call_llm(prompt: str, model_override: Optional[str] = None) -> str:
     if LLM_PROVIDER == "openai":
         return _call_openai(prompt, model_override=model_override)
     return _call_ollama(prompt, model_override=model_override)
-
-
-
-
