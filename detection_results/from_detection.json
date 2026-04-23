@@ -1,31 +1,57 @@
 {
-  "file_name": "manual_input.java",
+  "file_name": "StudentManager.java",
   "language": "Java",
-  "code": "class OrderProcessor:\n\n    # Long Parameter List + Long Method\n    def process_order(self, customer_name, customer_email, customer_address,\n                      product_id, product_name, product_price,\n                      quantity, discount, tax, shipping_cost):\n\n        total = 0\n\n        # Duplicate Code Block 1\n        if quantity > 0:\n            subtotal = product_price * quantity\n            if discount > 0:\n                subtotal = subtotal - (subtotal * discount)\n            subtotal = subtotal + (subtotal * tax)\n            total = subtotal + shipping_cost\n\n        # Duplicate Code Block 2 (same logic repeated)\n        if quantity > 0:\n            subtotal = product_price * quantity\n            if discount > 0:\n                subtotal = subtotal - (subtotal * discount)\n            subtotal = subtotal + (subtotal * tax)\n            total = subtotal + shipping_cost\n\n        # More logic (making method long)\n        if total > 100:\n            print(\"High value order\")\n        else:\n            print(\"Regular order\")\n\n        # More repeated logic (again duplicate)\n        if quantity > 0:\n            subtotal = product_price * quantity\n            if discount > 0:\n                subtotal = subtotal - (subtotal * discount)\n            subtotal = subtotal + (subtotal * tax)\n            total = subtotal + shipping_cost\n\n        return total",
+  "code": "public class StudentManager {\n\n    public void printStudent() {\n        int marks = 75;\n\n        if (marks > 50) {\n            System.out.println(\"Student Passed\");\n        } else {\n            System.out.println(\"Student Failed\");\n        }\n    }\n\n    public void printTeacher() {\n        int marks = 75;\n\n        if (marks > 50) {\n            System.out.println(\"Student Passed\");\n        } else {\n            System.out.println(\"Student Failed\");\n        }\n    }\n}",
   "priority_list": [
     {
-      "smell": "Magic Number",
+      "smell": "Duplicate Code",
       "category": "Implementation",
       "supported_by": [
-        "static_engine"
+        "static_engine",
+        "llm_engine"
       ],
-      "explanation": "Magic Number was flagged by static_engine. Static analysis detected Magic Number patterns. This can reduce readability and maintainability if left unresolved.",
-      "location": "General",
+      "explanation": "Both methods `printStudent()` and `printTeacher()` contain identical logic and output, creating redundant code that is difficult to maintain. Multiple analysis engines confirm this duplication, meaning any change to the pass/fail logic must be applied in both places, increasing the risk of inconsistencies.",
+      "location": "LOCATION: printStudent and printTeacher methods",
       "severity": "Major",
       "severity_score": 0.6,
       "smell_weight": 0.8,
       "priority_score": 0.48,
       "ui_severity": "2.4/5",
       "evidence": [
-        "Static analysis detected Magic Number patterns."
+        "Static analysis detected Duplicate Code patterns.",
+        "LLM confirmed: DESCRIPTION: Both methods contain identical code for checking and printing student pass/fail status"
+      ]
+    },
+    {
+      "smell": "Magic Number",
+      "category": "Implementation",
+      "supported_by": [
+        "static_engine",
+        "llm_engine"
+      ],
+      "explanation": "The hard-coded number `50` appears twice as a threshold without explanation, making it unclear what it represents (passing score? percentage?) and difficult to update consistently if requirements change. Multiple engines confirm this magic number reduces code clarity and maintenance efficiency.",
+      "location": "LOCATION: printStudent method line 4",
+      "severity": "Minor",
+      "severity_score": 0.3,
+      "smell_weight": 0.8,
+      "priority_score": 0.24,
+      "ui_severity": "1.2/5",
+      "evidence": [
+        "Static analysis detected Magic Number patterns.",
+        "LLM confirmed: DESCRIPTION: The number 50 is a hard-coded threshold without clear meaning"
       ]
     }
   ],
   "engine_summary": {
     "static_engine": [
-      "Magic Number"
+      "Magic Number",
+      "Duplicate Code"
     ],
     "metric_engine": [],
-    "llm_engine": []
+    "llm_engine": [
+      "Duplicate Code",
+      "Magic Number",
+      "Magic Number"
+    ]
   }
 }

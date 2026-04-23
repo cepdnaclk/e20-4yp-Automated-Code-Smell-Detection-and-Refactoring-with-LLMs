@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 OLLAMA_URL = os.getenv("OLLAMA_API_URL", "http://localhost:11434/api/generate")
 DETECTION_MODEL = os.getenv(
     "DETECTION_LLM_MODEL",
-    os.getenv("OLLAMA_MODEL", "deepseek-coder:6.7b")
+    os.getenv("OLLAMA_MODEL", "deepseek-v3.1:671b-cloud")
 )
 REQUEST_TIMEOUT_SECONDS = int(os.getenv("DETECTION_LLM_TIMEOUT_SECONDS", "20"))
 MAX_CODE_CHARS = int(os.getenv("DETECTION_LLM_MAX_CODE_CHARS", "3000"))

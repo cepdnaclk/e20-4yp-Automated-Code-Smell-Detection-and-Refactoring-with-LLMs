@@ -1,9 +1,11 @@
 ﻿from pathlib import Path
 import os
 
-
 BASE_DIR = Path(__file__).resolve().parent
-INPUT_ANALYSIS_PATH = Path(os.getenv("ANALYSIS_FILE", str(BASE_DIR / "detection_results" / "analysis.json")))
+
+INPUT_ANALYSIS_PATH = Path(
+    os.getenv("ANALYSIS_FILE", str(BASE_DIR / "detection_results" / "analysis.json"))
+)
 DETECTION_HANDOFF_PATH = BASE_DIR / "detection_results" / "from_detection.json"
 UPLOADS_DIR = BASE_DIR / "uploads"
 OUTPUTS_DIR = BASE_DIR / "outputs"
@@ -14,14 +16,16 @@ RULES_DIR = BASE_DIR / "rules"
 DEFAULT_OUTPUT_PATH = OUTPUTS_DIR / "latest_results.json"
 SMELL_CATALOG_PATH = RULES_DIR / "smell_catalog.json"
 
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama").strip().lower()
+# Force Ollama for now
+LLM_PROVIDER = "ollama"
 
-OLLAMA_PATH = os.getenv(
-    "OLLAMA_PATH",
-    r"C:\Users\Dhananji\AppData\Local\Programs\Ollama\ollama.exe",
-)
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "deepseek-coder:6.7b")
-OLLAMA_MODELS = [model.strip() for model in os.getenv("OLLAMA_MODELS", OLLAMA_MODEL).split(",") if model.strip()]
+# Hardcode executable path to avoid environment variable conflicts
+OLLAMA_PATH = r"C:\Users\Dharani\AppData\Local\Programs\Ollama\ollama.exe"
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "")
+# Use a model that is actually installed
+OLLAMA_MODEL = "deepseek-v3.1:671b-cloud"
+OLLAMA_MODELS = [OLLAMA_MODEL]
+
+# Keep OpenAI config present but inactive
+OPENAI_API_KEY = ""
+OPENAI_MODEL = ""
