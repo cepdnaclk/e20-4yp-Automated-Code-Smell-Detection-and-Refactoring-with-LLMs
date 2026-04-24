@@ -42,24 +42,26 @@ title: SmellSense AI
 
 ## Introduction
 
-Modern software systems continue to grow rapidly in size and complexity. As projects evolve, maintaining clean and understandable code becomes increasingly difficult. Poor coding practices often introduce **code smells**, which are indicators of deeper structural and maintainability problems in software systems. Refactoring helps improve software quality by restructuring code without changing its external behavior.
+Modern software systems continue to grow rapidly in size and complexity. As projects evolve, maintaining clean and maintainable code becomes increasingly difficult. Poor coding practices often introduce code smells, which indicate deeper structural and maintainability issues within software systems.
 
-SmellSense AI is a research-based intelligent system designed to automatically detect, explain, prioritize, and refactor code smells using a hybrid combination of:
+SmellSense AI is a research-based intelligent system designed to automatically detect, explain, prioritize, and refactor code smells using a hybrid combination of static analysis, software metrics, and Large Language Models (LLMs).
 
-- Static analysis
-- Software metrics
-- Machine learning techniques
-- Large Language Models (LLMs)
-
-The system provides an end-to-end workflow that assists developers in improving code quality and maintainability through intelligent automated refactoring.
+The system provides an end-to-end workflow that assists developers in improving software quality and maintainability through intelligent automated refactoring.
 
 ---
 
 ## Research Problem
 
-Manual code smell detection is often time-consuming, inconsistent, and difficult to scale across large projects. Traditional static analysis tools are mainly rule-based and usually lack explanation capabilities and severity analysis. Existing solutions also fail to provide a complete end-to-end workflow from detection to automated refactoring.
+Manual code smell detection is time-consuming, inconsistent, and difficult to scale across large software systems.
 
-Although LLMs can generate refactoring suggestions, they often suffer from:
+Traditional static analysis tools:
+
+- Depend heavily on rule-based detection
+- Lack contextual explanations
+- Do not provide severity analysis
+- Usually stop at detection without automated refactoring support
+
+Standalone LLM-based approaches also introduce challenges such as:
 
 - Inconsistent outputs
 - Invalid or unverified refactoring
@@ -71,10 +73,10 @@ SmellSense AI addresses these limitations through a hybrid intelligent pipeline.
 
 ## Objectives
 
-The main objectives of the project are:
+The primary objectives of the project are:
 
 - Detect code smells using multiple detection engines
-- Explain detected smells and assess their severity
+- Explain detected smells and assess severity
 - Automatically generate safe refactoring solutions
 - Provide a complete end-to-end workflow for developers
 
@@ -84,44 +86,28 @@ The main objectives of the project are:
 
 SmellSense AI introduces a fully integrated LLM-powered pipeline that:
 
-- Detects up to 30 different code smells
-- Automatically explains detected smells
-- Prioritizes smells based on severity
-- Generates automated refactoring suggestions
-- Provides an interactive chatbot interface for developers
+- Detects multiple code smells
+- Generates explanations and severity rankings
+- Prioritizes smells based on impact
+- Produces automated refactoring suggestions
+- Validates generated outputs
+- Provides chatbot-based interaction for developers
 
 ---
 
 ## System Architecture
 
-The system consists of several integrated components working together to provide intelligent code analysis and refactoring support.
+The system consists of multiple integrated components working together to provide intelligent code analysis and refactoring support.
 
 ### Main Components
 
-- **Frontend Chatbot Interface**
-  - Upload or paste source code
-  - Display detected smells and refactored output
-
-- **Backend API Server**
-  - Request routing
-  - Session management
-  - Pipeline orchestration
-
-- **Feature Extraction Engine**
-  - Extracts metrics such as:
-    - CBO
-    - LCOM
-    - OOP metrics
-
-- **Detection Engines**
-  - Static analysis engine
-  - Metric-based analysis
-  - LLM-based semantic analysis
-
-- **Refactoring Engine**
-  - Strategy selection
-  - Smell-aware refactoring generation
-  - Validation and repair pipeline
+- Frontend chatbot interface
+- Backend API server
+- Feature extraction engine
+- Static analysis engine
+- Metric analysis engine
+- LLM semantic analysis engine
+- Refactoring and validation engine
 
 ---
 
@@ -129,96 +115,289 @@ The system consists of several integrated components working together to provide
 
 ![Methodology](images/methodology.png)
 
-The project methodology consists of four major stages.
+The methodology consists of several major stages.
 
-### 1. Data Acquisition
+### Data Acquisition
 
 ![Data Acquisition](images/dataAquisition.png)
 
-The dataset preparation pipeline includes:
+The dataset preparation process includes:
 
-- Downloading source datasets
-- Extracting and cleaning source code
+- Downloading datasets
+- Cleaning and extracting source code
 - Mining Java projects from GitHub
-- Recovering software metrics using static analysis tools
-- Preparing datasets for ML training and LLM contextualization
+- Recovering software metrics
+- Preparing datasets for ML training
 
-### 2. Code Smell Detection
+### Code Smell Detection
 
 ![Code Smell Detection](images/smellDetection.png)
 
-The detection pipeline includes:
+The detection process includes:
 
 - Feature extraction
 - Static analysis
 - Regex parsing
 - Metrics analysis
-- AI-based semantic analysis
+- AI semantic analysis
 
-The system combines multiple engines to improve detection quality and coverage.
+### Smell Explanation & Prioritization
 
-### 3. Smell Explanation & Prioritization
+![Prioritization](images/prioritization.png)
 
-![Smell Explanation & Prioritization](images/prioritization.png)
-
-Detected smells are processed through an LLM-based explanation engine which:
+The prioritization engine:
 
 - Generates human-readable explanations
 - Predicts severity levels
 - Assigns priority scores
 - Produces ranked smell lists
 
-### 4. Automated Refactoring
+### Automated Refactoring
 
 ![Automated Refactoring](images/refactoring.png)
 
-The refactoring pipeline includes:
+The refactoring process includes:
 
 - Refactoring decision engine
 - Smell-to-strategy mapping
 - Prompt engineering
 - Validation and repair mechanisms
-- Compilation and syntax validation
 
-### 5. Model Evaluation
+### Model Evaluation
 
 ![Model Evaluation](images/modelEvaluation.png)
 
-Evaluation focuses on:
+Evaluation measures:
 
 - Detection accuracy
-- Severity assessment quality
-- Refactoring validation
+- Refactoring correctness
 - Runtime performance
-- End-to-end workflow efficiency
+- Workflow efficiency
 
-### 6. Chatbot Development
+### Chatbot Development
 
 ![Chatbot Development](images/deployChatbot.png)
 
-The chatbot interface allows developers to:
+The chatbot interface enables users to:
 
-- Upload or paste source code
-- View detected smells with explanations
-- See severity scores and rankings
-- Access generated refactored code
+- Upload or paste code
+- View detected smells
+- Read explanations
+- Access refactoring suggestions
 
 ---
 
 ## Detection & Analysis Module
+
+The detection and analysis module combines multiple intelligent techniques to improve code smell identification accuracy and coverage.
 
 ### Features
 
 - Multi-engine smell detection
 - Parallel processing pipeline
 - Context-aware AI explanations
-- Severity prediction and prioritization
+- Severity prediction
 - Structured JSON outputs
+
+### Detection Pipeline
+
+The detection system combines:
+
+- Static analysis
+- Metric analysis
+- AI semantic evaluation
 
 ### Detection Output
 
 Generated output file:
 
+````text
+data/priority_list.json
+
+##  Refactoring Module
+
+The refactoring module automatically generates smell-aware refactoring solutions using Large Language Models (LLMs). After the detection and prioritization stages identify code smells and their severity levels, the system selects appropriate refactoring strategies based on the smell type and context.
+
+The refactoring workflow includes:
+
+- Refactoring decision engine
+- Smell-to-strategy mapping
+- LLM-based code transformation
+- Validation layer
+- Automatic repair retry mechanism
+
+![Automated Refactoring](images/refactoring.png)
+
+The generated refactored outputs are validated to improve reliability and reduce incorrect or unsafe code transformations.
+
+The validation process checks:
+
+- Syntax correctness
+- Compilation success
+- Structural consistency
+- Whether new errors are introduced after refactoring
+
+If validation fails, the system automatically retries the repair process to generate an improved output.
+
+The final refactoring results are stored in a structured JSON output file.
+
+```text
+outputs/latest_results.json
+
+The output includes:
+
+- Detected smell type
+- Selected refactoring strategy
+- Refactored code
+- Explanation of the applied refactoring
+- Validation status
+- Error details if refactoring fails
+
+---
+
+## Results
+
+The proposed system demonstrates improvements over traditional tools and standalone LLM approaches.
+
+### Chatbot Interface Results
+
+The chatbot interface acts as the primary interaction layer between the user and the backend analysis pipeline.
+
+The workflow includes:
+
+1. User uploads or pastes source code
+2. Detection engines analyze the code
+3. Detected smells are consolidated
+4. Priority rankings are generated
+5. Refactoring suggestions are produced
+6. Results are displayed to the user
+
+---
+
+### Initial Detection Results
+
+The following interface demonstrates the initial analysis results generated after code submission.
+
+![Chatbot Result Interface - Initial Output](images/result1.png)
+
+This interface displays:
+
+- Uploaded source code input section
+- Consolidated detected smells
+- Severity-based priority rankings
+- Initial refactoring recommendations
+
+---
+
+### Detailed Analysis and Refactoring Results
+
+The following interface demonstrates detailed chatbot outputs after selecting detected smells and generated refactoring suggestions.
+
+![Chatbot Result Interface - Detailed Output](images/result2.png)
+
+This interface displays:
+
+- Detailed smell explanations
+- Severity information
+- Affected code locations
+- Refactoring rationale
+- Validation results
+- Generated refactored code
+
+---
+
+### Key Improvements
+
+- Better detection coverage
+- Structured explanations
+- Smell-aware refactoring
+- Improved output reliability
+- End-to-end workflow integration
+
+---
+
+## Impact & Limitations
+
+### Impact
+
+- Improves software maintainability
+- Enhances developer productivity
+- Combines static analysis with AI techniques
+- Provides a modular research framework
+
+### Limitations
+
+- Validation mainly focuses on syntax and compilation
+- Dependent on local LLM performance
+- Structural smells remain challenging
+
+---
+
+## Future Work
+
+Future improvements include:
+
+- IDE plugin integration
+- Support for additional programming languages
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.10+
+- Java Runtime Environment
+- Ollama running locally
+
+---
+
+### Run Backend
+
+```bash
+python -m backend.app.main
+
+Backend API:
+
+```text
+http://localhost:8000
+````
+
+---
+
+### Run Frontend
+
+```bash
+streamlit run frontend/ui/chatbot_ui.py
+```
+
+Frontend UI:
+
+```text
+http://localhost:8501
+```
+
+---
+
+## Outputs
+
+### Detection Output
+
 ```text
 data/priority_list.json
 ```
+
+### Refactoring Output
+
+```text
+outputs/latest_results.json
+```
+
+---
+
+## Links
+
+- [GitHub Repository](https://github.com/cepdnaclk/e20-4yp-Automated-Code-Smell-Detection-and-Refactoring-with-LLMs)
+- [Project Website](https://cepdnaclk.github.io/e20-4yp-Automated-Code-Smell-Detection-and-Refactoring-with-LLMs/)
+- [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
+- [University of Peradeniya](https://eng.pdn.ac.lk/)
