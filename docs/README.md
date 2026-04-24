@@ -211,10 +211,11 @@ The detection system combines:
 
 Generated output file:
 
-````text
+```text
 data/priority_list.json
+```
 
-##  Refactoring Module
+## Refactoring Module
 
 The refactoring module automatically generates smell-aware refactoring solutions using Large Language Models (LLMs). After the detection and prioritization stages identify code smells and their severity levels, the system selects appropriate refactoring strategies based on the smell type and context.
 
@@ -243,6 +244,7 @@ The final refactoring results are stored in a structured JSON output file.
 
 ```text
 outputs/latest_results.json
+```
 
 The output includes:
 
@@ -253,7 +255,7 @@ The output includes:
 - Validation status
 - Error details if refactoring fails
 
----
+````
 
 ## Results
 
