@@ -283,15 +283,15 @@ Future improvements include:
 
 ### Run Backend
 
-````bash
+`````bash
 python -m backend.app.main
 ```
 
 Backend API:
 
-```text
-http://localhost:8000
-````
+````text
+http://localhost:8501
+`````
 
 ---
 
