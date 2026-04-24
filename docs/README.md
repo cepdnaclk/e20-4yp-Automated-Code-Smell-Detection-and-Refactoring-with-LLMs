@@ -94,8 +94,6 @@ SmellSense AI introduces a fully integrated LLM-powered pipeline that:
 
 ## System Architecture
 
-![Methodology](images/methodology.png)
-
 The system consists of several integrated components working together to provide intelligent code analysis and refactoring support.
 
 ### Main Components
@@ -129,11 +127,13 @@ The system consists of several integrated components working together to provide
 
 ## Methodology
 
+![Methodology](images/methodology.png)
+
 The project methodology consists of four major stages.
 
 ### 1. Data Acquisition
 
-![Data Acquisition](images/dataAcquisition.png)
+![Data Acquisition](images/dataAquisition.png)
 
 The dataset preparation pipeline includes:
 
