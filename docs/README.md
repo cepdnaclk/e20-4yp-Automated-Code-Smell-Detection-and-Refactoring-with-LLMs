@@ -255,7 +255,7 @@ The output includes:
 - Validation status
 - Error details if refactoring fails
 
-````
+``
 
 ## Results
 
@@ -356,7 +356,7 @@ Future improvements include:
 
 ### Run Backend
 
-```bash
+````bash
 python -m backend.app.main
 
 Backend API:
