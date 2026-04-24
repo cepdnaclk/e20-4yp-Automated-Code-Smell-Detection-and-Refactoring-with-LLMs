@@ -29,14 +29,11 @@ title: SmellSense AI
 4. [Proposed Solution](#proposed-solution)
 5. [System Architecture](#system-architecture)
 6. [Methodology](#methodology)
-7. [Detection & Analysis Module](#detection--analysis-module)
-8. [Refactoring Module](#refactoring-module)
-9. [Results](#results)
-10. [Impact & Limitations](#impact--limitations)
-11. [Future Work](#future-work)
-12. [Getting Started](#getting-started)
-13. [Outputs](#outputs)
-14. [Links](#links)
+7. [Results](#results)
+8. [Impact & Limitations](#impact--limitations)
+9. [Future Work](#future-work)
+10. [Getting Started](#getting-started)
+11. [Links](#links)
 
 ---
 
@@ -187,76 +184,6 @@ The chatbot interface enables users to:
 
 ---
 
-## Detection & Analysis Module
-
-The detection and analysis module combines multiple intelligent techniques to improve code smell identification accuracy and coverage.
-
-### Features
-
-- Multi-engine smell detection
-- Parallel processing pipeline
-- Context-aware AI explanations
-- Severity prediction
-- Structured JSON outputs
-
-### Detection Pipeline
-
-The detection system combines:
-
-- Static analysis
-- Metric analysis
-- AI semantic evaluation
-
-### Detection Output
-
-Generated output file:
-
-```text
-data/priority_list.json
-```
-
-## Refactoring Module
-
-The refactoring module automatically generates smell-aware refactoring solutions using Large Language Models (LLMs). After the detection and prioritization stages identify code smells and their severity levels, the system selects appropriate refactoring strategies based on the smell type and context.
-
-The refactoring workflow includes:
-
-- Refactoring decision engine
-- Smell-to-strategy mapping
-- LLM-based code transformation
-- Validation layer
-- Automatic repair retry mechanism
-
-![Automated Refactoring](images/refactoring.png)
-
-The generated refactored outputs are validated to improve reliability and reduce incorrect or unsafe code transformations.
-
-The validation process checks:
-
-- Syntax correctness
-- Compilation success
-- Structural consistency
-- Whether new errors are introduced after refactoring
-
-If validation fails, the system automatically retries the repair process to generate an improved output.
-
-The final refactoring results are stored in a structured JSON output file.
-
-```text
-outputs/latest_results.json
-```
-
-The output includes:
-
-- Detected smell type
-- Selected refactoring strategy
-- Refactored code
-- Explanation of the applied refactoring
-- Validation status
-- Error details if refactoring fails
-
-``
-
 ## Results
 
 The proposed system demonstrates improvements over traditional tools and standalone LLM approaches.
@@ -377,22 +304,6 @@ Frontend UI:
 
 ```text
 http://localhost:8501
-```
-
----
-
-## Outputs
-
-### Detection Output
-
-```text
-data/priority_list.json
-```
-
-### Refactoring Output
-
-```text
-outputs/latest_results.json
 ```
 
 ---
