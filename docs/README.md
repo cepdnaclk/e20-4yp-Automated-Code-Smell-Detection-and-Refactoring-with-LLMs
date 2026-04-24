@@ -6,8 +6,6 @@ repository-name: e20-4yp-Automated-Code-Smell-Detection-and-Refactoring-with-LLM
 title: SmellSense AI
 ---
 
-# SmellSense AI - Automated Code Smell Detection and Refactoring with LLMs
-
 ![SmellSense AI](images/logo.png)
 
 ## Team
@@ -44,7 +42,7 @@ title: SmellSense AI
 
 ## Introduction
 
-Modern software systems continue to grow rapidly in size and complexity. As projects evolve, maintaining clean and understandable code becomes increasingly difficult. Poor coding practices often introduce **code smells**, which are indicators of deeper structural and maintainability problems in software systems. Refactoring helps improve software quality by restructuring code without changing its external behavior. :contentReference[oaicite:0]{index=0}
+Modern software systems continue to grow rapidly in size and complexity. As projects evolve, maintaining clean and understandable code becomes increasingly difficult. Poor coding practices often introduce **code smells**, which are indicators of deeper structural and maintainability problems in software systems. Refactoring helps improve software quality by restructuring code without changing its external behavior.
 
 SmellSense AI is a research-based intelligent system designed to automatically detect, explain, prioritize, and refactor code smells using a hybrid combination of:
 
@@ -59,7 +57,7 @@ The system provides an end-to-end workflow that assists developers in improving 
 
 ## Research Problem
 
-Manual code smell detection is often time-consuming, inconsistent, and difficult to scale across large projects. Traditional static analysis tools are mainly rule-based and usually lack explanation capabilities and severity analysis. Existing solutions also fail to provide a complete end-to-end workflow from detection to automated refactoring. :contentReference[oaicite:1]{index=1}
+Manual code smell detection is often time-consuming, inconsistent, and difficult to scale across large projects. Traditional static analysis tools are mainly rule-based and usually lack explanation capabilities and severity analysis. Existing solutions also fail to provide a complete end-to-end workflow from detection to automated refactoring.
 
 Although LLMs can generate refactoring suggestions, they often suffer from:
 
@@ -78,7 +76,7 @@ The main objectives of the project are:
 - Detect code smells using multiple detection engines
 - Explain detected smells and assess their severity
 - Automatically generate safe refactoring solutions
-- Provide a complete end-to-end workflow for developers :contentReference[oaicite:2]{index=2}
+- Provide a complete end-to-end workflow for developers
 
 ---
 
@@ -90,13 +88,13 @@ SmellSense AI introduces a fully integrated LLM-powered pipeline that:
 - Automatically explains detected smells
 - Prioritizes smells based on severity
 - Generates automated refactoring suggestions
-- Provides an interactive chatbot interface for developers :contentReference[oaicite:3]{index=3}
+- Provides an interactive chatbot interface for developers
 
 ---
 
 ## System Architecture
 
-![High Level Architecture](images/HighLevelArchitecture.jpg)
+![Methodology](images/methodology.png)
 
 The system consists of several integrated components working together to provide intelligent code analysis and refactoring support.
 
@@ -131,9 +129,11 @@ The system consists of several integrated components working together to provide
 
 ## Methodology
 
-The project methodology consists of four major stages. :contentReference[oaicite:4]{index=4}
+The project methodology consists of four major stages.
 
 ### 1. Data Acquisition
+
+![Data Acquisition](images/dataAcquisition.png)
 
 The dataset preparation pipeline includes:
 
@@ -144,6 +144,8 @@ The dataset preparation pipeline includes:
 - Preparing datasets for ML training and LLM contextualization
 
 ### 2. Code Smell Detection
+
+![Code Smell Detection](images/smellDetection.png)
 
 The detection pipeline includes:
 
@@ -157,6 +159,8 @@ The system combines multiple engines to improve detection quality and coverage.
 
 ### 3. Smell Explanation & Prioritization
 
+![Smell Explanation & Prioritization](images/prioritization.png)
+
 Detected smells are processed through an LLM-based explanation engine which:
 
 - Generates human-readable explanations
@@ -165,6 +169,8 @@ Detected smells are processed through an LLM-based explanation engine which:
 - Produces ranked smell lists
 
 ### 4. Automated Refactoring
+
+![Automated Refactoring](images/refactoring.png)
 
 The refactoring pipeline includes:
 
@@ -176,6 +182,8 @@ The refactoring pipeline includes:
 
 ### 5. Model Evaluation
 
+![Model Evaluation](images/modelEvaluation.png)
+
 Evaluation focuses on:
 
 - Detection accuracy
@@ -185,6 +193,8 @@ Evaluation focuses on:
 - End-to-end workflow efficiency
 
 ### 6. Chatbot Development
+
+![Chatbot Development](images/deployChatbot.png)
 
 The chatbot interface allows developers to:
 
