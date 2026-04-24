@@ -285,12 +285,13 @@ Future improvements include:
 
 ````bash
 python -m backend.app.main
+```
 
 Backend API:
 
 ```text
 http://localhost:8000
-```
+````
 
 ---
 
@@ -314,4 +315,3 @@ http://localhost:8501
 - [Project Website](https://cepdnaclk.github.io/e20-4yp-Automated-Code-Smell-Detection-and-Refactoring-with-LLMs/)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
-````
